@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&pause=1000&color=FF00F6&center=true&vCenter=true&random=false&width=524&lines=%E2%8A%B9+ Im+Felton Da+Silva+Welcome+to+my+profile!+%CB%99%E1%B5%95%CB%99+%E2%8A%B9+" alt="Typing SVG">
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&pause=1000&color=FF00F6&center=true&vCenter=true&random=false&width=524&lines=%E2%8A%B9+Im+Felton Da+Silva+Welcome+to+my+profile!+%CB%99%E1%B5%95%CB%99+%E2%8A%B9+" alt="Typing SVG">
   </a>
 </div>
 
@@ -9,6 +9,7 @@
 <div align="center">
 Desenvolvedor FullStack || Help Desk ||
 </div>
+
 ## Sobre Mim
 
 Sou um profissional de TI com experiência em criar soluções robustas e eficientes. Minha paixão é transformar ideias em realidade através de código limpo e bem estruturado, além de resolver problemas informáticos de maneira rápida e eficiente. Estou sempre em busca de novos desafios e oportunidades para aprimorar minhas habilidades e contribuir para projetos inovadores.
@@ -47,15 +48,19 @@ Sou um profissional de TI com experiência em criar soluções robustas e eficie
 *  Sistemas Operacionais: Windows, Linux, macOS
 *  Conhecimento em Cloud: AWS, Azure, Google Cloud Platform (Básico)
 
+
+<div align="center">
+ 
 ## 📊 Estatísticas do GitHub (Opcional)
 
 <p>
 <img align="left" alt="GitHub Stats" height="200" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Felton7JE&theme=tokyonight&layout=compact&custom_title=Tecnologias&langs_count=9" />
 </p>
 
-<br>
-<br>
 
+</div>
+<br>
+<br>
 
 #
 
@@ -64,6 +69,9 @@ Sou um profissional de TI com experiência em criar soluções robustas e eficie
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Felton7JE/Felton7JE/output/github-contribution-grid-snake-dark.svg">
   <img align="center" alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/Felton7JE/Felton7JE/output/github-contribution-grid-snake.svg">
 </picture>
+
+<br>
+<br>
 ## 🔗 Conecte-se Comigo
 
 [Coloque aqui seus links do LinkedIn, GitHub, etc.]
