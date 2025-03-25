@@ -1,0 +1,118 @@
+/* Reset e Estilos Globais */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9fbff;
+}
+
+/* Container Principal */
+.timeline-container {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+/* Títulos */
+.sub-title {
+    font-size: 14px;
+    color: #3366ff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.title {
+    font-size: 28px;
+    color: #2d3d5f;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+/* Linha do Tempo */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Linha Vertical */
+.timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background-color: #3366ff;
+    transform: translateX(-50%);
+}
+
+/* Itens da Linha do Tempo */
+.timeline-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.timeline-item.left {
+    flex-direction: row-reverse;
+    text-align: left;
+}
+
+.timeline-item.right {
+    text-align: right;
+}
+
+/* Caixa de Conteúdo */
+.content {
+    width: 300px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Data */
+.date {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 150px;
+    font-weight: bold;
+    color: #3366ff;
+}
+
+.left .date {
+    right: calc(50% + 30px);
+}
+
+.right .date {
+    left: calc(50% + 30px);
+}
+
+.year {
+    font-size: 22px;
+}
+
+.month {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Ícones */
+.icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #3366ff;
+    border: 3px solid #3366ff;
+}

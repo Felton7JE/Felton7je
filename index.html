@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Completo | Felton da Silva</title>
+    <link rel="icon" href="icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto Mono', monospace;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: #1e1e1e;
+            color: #c6c6c6;
+            line-height: 1.6;
+        }
+
+        body.light-mode {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        .portfolio-section.light-mode,
+        .timeline-section.light-mode,
+        .contact-section.light-mode {
+            background-color: #fff;
+        }
+
+        .portfolio-card.light-mode,
+        .content.light-mode,
+        .contact-form.light-mode {
+            background-color: #fff;
+            color: #333;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .portfolio-section {
+            background-color: #282c34;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .portfolio-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .portfolio-card {
+            background: #3e4451;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile {
+            grid-column: span 2;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #61dafb;
+        }
+
+        .profile-info h2 {
+            font-size: 1.8rem;
+            color: #eee;
+            margin-bottom: 5px;
+        }
+
+        .profile-info p {
+            color: #bbb;
+            font-size: 1rem;
+        }
+
+        .experience, .clients, .total-projects {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .experience h3, .clients h3, .total-projects h3 {
+            font-size: 2rem;
+            color: #61dafb;
+            margin-bottom: 5px;
+        }
+
+        .experience p, .clients p, .total-projects p {
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        .collaborate {
+            grid-column: span 3;
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #353a47 0%, #454f61 100%);
+            border-radius: 12px;
+        }
+
+        .collaborate h2 {
+            font-size: 2rem;
+            color: #eee;
+        }
+
+        .collaborate span {
+            color: #61dafb;
+            font-weight: 700;
+        }
+
+        .timeline-section {
+            background-color: #282c34;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .sub-title {
+            font-size: 0.9rem;
+            color: #61dafb;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .title {
+            font-size: 2.2rem;
+            color: #eee;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #61dafb, #8a63ff);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .timeline-item.left {
+            flex-direction: row-reverse;
+            text-align: left;
+        }
+
+        .timeline-item.right {
+            text-align: right;
+        }
+
+        .content {
+            width: 320px;
+            background-color: #3e4451;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .content:hover {
+            transform: scale(1.02);
+        }
+
+        .content h3 {
+            color: #eee;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .content p {
+            color: #bbb;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .date {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 150px;
+            font-weight: bold;
+            color: #61dafb;
+        }
+
+        .left .date {
+            right: calc(50% + 30px);
+            text-align: right;
+        }
+
+        .right .date {
+            left: calc(50% + 30px);
+            text-align: left;
+        }
+
+        .year {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .month {
+            font-size: 0.9rem;
+            color: #8a9bb2;
+            font-weight: 500;
+        }
+
+        .icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background-color: #3e4451;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #61dafb;
+            border: 3px solid #61dafb;
+            box-shadow: 0 4px 10px rgba(97, 218, 251, 0.4);
+        }
+
+        @media (max-width: 900px) {
+            .portfolio-container {
+                grid-template-columns: 1fr;
+            }
+
+            .profile, .collaborate {
+                grid-column: span 1;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item, .timeline-item.left {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-left: 60px;
+                margin-bottom: 40px;
+            }
+
+            .content {
+                width: 100%;
+            }
+
+            .date {
+                position: relative;
+                top: auto;
+                transform: none;
+                margin-bottom: 10px;
+            }
+
+            .left .date, .right .date {
+                left: auto;
+                right: auto;
+                text-align: left;
+            }
+
+            .icon {
+                left: 0;
+                transform: translateX(-50%);
+            }
+        }
+
+        .skill-icon {
+          font-size: 1.2em;
+          margin-right: 5px;
+            color: #61dafb;
+        }
+
+        footer {
+            background-color: #282c34;
+            color: #bbb;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+        }
+
+        .mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #3e4451;
+            color: #61dafb;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .mode-toggle:hover {
+            background-color: #61dafb;
+            color: #282c34;
+        }
+
+        .contact-section {
+            background-color: #282c34;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .contact-form {
+            background-color: #3e4451;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1rem;
+            color: #eee;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background-color: #4b5363;
+            color: #bbb;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1rem;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(97, 218, 251, 0.5);
+        }
+
+        button[type="submit"] {
+            background-color: #61dafb;
+            color: #282c34;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-family: 'Roboto Mono', monospace;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #53b4d3;
+        }
+
+        @media (max-width: 600px) {
+            .contact-form {
+                padding: 20px;
+            }
+        }
+
+        a {
+            color: #9ece6a;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #61dafb;
+        }
+
+        body.light-mode a {
+            color: #007bff;
+        }
+
+        body.light-mode a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="mode-toggle" onclick="toggleDarkMode()">
+        <i class="fas fa-moon"></i> Modo Noturno
+    </button>
+
+    <div class="main-container">
+        <section class="portfolio-section">
+            <div class="portfolio-container">
+                <div class="portfolio-card profile">
+                    <img src="profile.png" alt="Profile">
+                    <div class="profile-info">
+                        <h2>Felton da Silva</h2>
+                        <p>Software Developer | IT Support | Full-Stack Enthusiast</p>
+                    </div>
+                </div>
+                <div class="portfolio-card credentials">
+                    <h3>Certifications <i class="fas fa-certificate"></i></h3>
+                    <p>Java, React, Networking, IT Support</p>
+                </div>
+                <div class="portfolio-card projects">
+                    <h3>Projects <i class="fas fa-code-branch"></i></h3>
+                    <p>Web Apps, Systems, Integrations, IT Solutions</p>
+                </div>
+                <div class="portfolio-card blog">
+                    <h3>Skills <i class="fas fa-tools"></i></h3>
+                    <p>
+                      <i class="fab fa-java skill-icon"></i> Java,
+                      <i class="fab fa-python skill-icon"></i> Python,
+                      <i class="fab fa-react skill-icon"></i> React,
+                      <i class="fab fa-android skill-icon"></i> Flutter,
+                      <i class="fab fa-wordpress skill-icon"></i> WordPress,
+                      <i class="fas fa-database skill-icon"></i> MySQL
+                    </p>
+                </div>
+                <div class="portfolio-card specialization">
+                    <h3>Contact <i class="fas fa-envelope"></i></h3>
+                    <p>
+                        <a href="mailto:dasilvafelton7@gmail.com"><i class="fas fa-envelope"></i> dasilvafelton7@gmail.com</a><br>
+                         <a href="https://www.linkedin.com/in/feltondasilva" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a><br>
+                         <a href="https://wa.me/+2588845120809" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a><br>
+                        <a href="https://github.com/Felton7JE" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    </p>
+                </div>
+                <div class="portfolio-card experience">
+                    <h3>2+</h3>
+                    <p>Years of Experience</p>
+                </div>
+                <div class="portfolio-card clients">
+                    <h3>+10</h3>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="portfolio-card total-projects">
+                    <h3>+4</h3>
+                    <p>Satisfied Clients</p>
+                </div>
+                <div class="portfolio-card collaborate">
+                    <h2>Let's build <span>something great.</span></h2>
+                </div>
+            </div>
+        </section>
+
+        <section class="timeline-section">
+            <div class="timeline-header">
+                <h3 class="sub-title">MY JOURNEY</h3>
+                <h1 class="title">Key milestones in my <br>development career</h1>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="content">
+                        <h3>First Steps in Java</h3>
+                        <p>Started learning Java, focusing on object-oriented principles and data structures. Built simple console applications and explored the basics of the Java ecosystem.</p>
+                    </div>
+                    <div class="date">
+                        <span class="year">2021</span>
+                        <span class="month">JUN 2021</span>
+                    </div>
+                    <div class="icon">
+                        <i class="fab fa-java"></i>
+                    </div>
+                </div>
+
+                <div class="timeline-item right">
+                    <div class="content">
+                        <h3>Web Development Immersion</h3>
+                        <p>Dived into web development, learning HTML, CSS, and JavaScript. Created my first static websites and started experimenting with front-end frameworks.</p>
+                    </div>
+                    <div class="date">
+                        <span class="year">2021</span>
+                        <span class="month">DEC 2021</span>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                </div>
+
+                <div class="timeline-item left">
+                    <div class="content">
+                        <h3>Spring Boot & REST APIs</h3>
+                        <p>Started working with Spring Boot to build RESTful APIs. Implemented backend logic for web applications and learned about database integration with MySQL and PostgreSQL.</p>
+                         <p><a href="https://github.com/Felton7JE/crud_springboot" target="_blank">See the Spring Boot CRUD project on GitHub</a></p>
+
+                    </div>
+                    <div class="date">
+                        <span class="year">2022</span>
+                        <span class="month">SEP 2022</span>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                </div>
+
+                <div class="timeline-item right">
+                    <div class="content">
+                        <h3>React.js Front-End Development</h3>
+                        <p>Began learning React.js and building interactive user interfaces. Implemented front-end components for web applications and learned about state management and component-based architecture.</p>
+                    </div>
+                    <div class="date">
+                        <span class="year">2023</span>
+                        <span class="month">MAR 2023</span>
+                    </div>
+                    <div class="icon">
+                        <i class="fab fa-react"></i>
+                    </div>
+                </div>
+
+                <div class="timeline-item left">
+                    <div class="content">
+                         <h3>Spring Boot Guide Project (Current)</h3>
+                        <p>Currently working on a comprehensive Spring Boot guide for beginners, covering project setup, database configuration, and API testing to provide a solid foundation for developers. This guide is built with HTML, CSS, and JavaScript.</p>
+                        <p><a href="https://felton7je.github.io/projecto_001/" target="_blank">View the Spring Boot Guide Project</a></p>
+
+                    </div>
+
+                    <div class="date">
+                        <span class="year">2023</span>
+                        <span class="month">JUN 2023 - Present</span>
+                    </div>
+                    <div class="icon">
+                         <i class="fab fa-java"></i>
+                    </div>
+                </div>
+
+                 <div class="timeline-item right">
+                    <div class="content">
+                         <h3>Triplece Solutions Web Application</h3>
+                        <p>Developed the Triplece Solutions website ( <a href="https://tsolutions.onrender.com/autorizado/index" target="_blank">Triplece Solutions</a> ) as a personal project using Spring Boot and MySQL.</p>
+                    </div>
+                    <div class="date">
+                        <span class="year">2024</span>
+                        <span class="month">JAN 2024 - MAR 2024</span>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                </div>
+
+                 <div class="timeline-item left">
+                    <div class="content">
+                        <h3>Unizambeze Internship & Conference Website</h3>
+                        <p>Interned at Unizambeze, gaining experience in computer repair and maintenance, web development and design, IT support, and network troubleshooting. Designed and developed the university's scientific conference website using HTML, CSS, Bootstrap, and JavaScript.</p>
+                         <p><a href="https://unizambeze.github.io/PortalConferencia/" target="_blank">View the UniZambeze Conference Portal</a></p>
+
+                    </div>
+                    <div class="date">
+                        <span class="year">2024</span>
+                        <span class="month">JAN 2024 - MAR 2024</span>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                </div>
+
+                <div class="timeline-item right">
+                    <div class="content">
+                         <h3>Business Logistic & Service Internship (Current)</h3>
+                        <p>Currently interning at Business Logistic & Service, gaining hands-on experience in IT support, network administration, and web development. One of my primary tasks is developing the Global Marine Services website (see next entry).</p>
+
+                    </div>
+                    <div class="date">
+                        <span class="year">2024</span>
+                        <span class="month">JUN 2024 - Present</span>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                </div>
+
+                <div class="timeline-item left">
+                    <div class="content">
+                        <h3>Global Marine Services Website (BLS Internship - Current)</h3>
+                        <p>Developing the Global Marine Services website as part of my internship at Business Logistic & Service. This website is built with HTML, CSS, and JavaScript, with a focus on creating a responsive and user-friendly experience.</p>
+                         <p><a href="https://gmslda.co.mz/" target="_blank">Visit the Global Marine Services Website</a></p>
+
+                    </div>
+                    <div class="date">
+                        <span class="year">2024</span>
+                        <span class="month">APR 2024 - Present</span>
+                    </div>
+                    <div class="icon">
+                        <i class="fab fa-wordpress"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="contact-header">
+                <h3 class="sub-title">CONTACT ME</h3>
+                <h1 class="title">Let's get in touch!</h1>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </div>
+
+    <footer>
+        © 2024 Felton da Silva. All rights reserved.
+    </footer>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('light-mode');
+            document.querySelector('.portfolio-section').classList.toggle('light-mode');
+            document.querySelector('.timeline-section').classList.toggle('light-mode');
+            document.querySelector('.contact-section').classList.toggle('light-mode');
+
+            const portfolioCards = document.querySelectorAll('.portfolio-card');
+            portfolioCards.forEach(card => card.classList.toggle('light-mode'));
+
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => content.classList.toggle('light-mode'));
+
+            const contactForm = document.querySelector('.contact-form');
+            if (contactForm) {
+                contactForm.classList.toggle('light-mode');
+            }
+        }
+    </script>
+</body>
+</html>
+```
