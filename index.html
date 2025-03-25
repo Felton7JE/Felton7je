@@ -42,10 +42,28 @@
         .main-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 0 20px;
             display: flex;
             flex-direction: column;
             gap: 60px;
+        }
+
+        .hello-header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #282c34;
+            color: #61dafb;
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            overflow: hidden; /* Garante que o texto não vaze durante a animação */
+            white-space: nowrap; /* Impede que o texto quebre para a próxima linha */
+        }
+
+        body.light-mode .hello-header {
+            background-color: #f5f7fa;
+            color: #007bff;
         }
 
         .portfolio-section {
@@ -437,6 +455,21 @@
         body.light-mode a:hover {
             color: #0056b3;
         }
+
+        /* Estilos para a animação de digitação */
+        .typing-animation {
+            animation: typing 4s steps(24, end) forwards, blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { color: transparent }
+            50% { color: #61dafb; } /* Cor do cursor */
+        }
     </style>
 </head>
 <body>
@@ -444,6 +477,8 @@
     <button class="mode-toggle" onclick="toggleDarkMode()">
         <i class="fas fa-moon"></i> Modo Noturno
     </button>
+
+    <h1 class="hello-header typing-animation">Hello, Welcome to My Profile...</h1>
 
     <div class="main-container">
         <section class="portfolio-section">
@@ -690,8 +725,16 @@
             if (contactForm) {
                 contactForm.classList.toggle('light-mode');
             }
+
+            const helloHeader = document.querySelector('.hello-header');
+            if (document.body.classList.contains('light-mode')) {
+                helloHeader.style.backgroundColor = '#f5f7fa';
+                helloHeader.style.color = '#007bff';
+            } else {
+                helloHeader.style.backgroundColor = '#282c34';
+                helloHeader.style.color = '#61dafb';
+            }
         }
     </script>
 </body>
 </html>
-```
