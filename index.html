@@ -57,8 +57,8 @@
             font-weight: bold;
             letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            overflow: hidden; /* Garante que o texto não vaze durante a animação */
-            white-space: nowrap; /* Impede que o texto quebre para a próxima linha */
+            overflow: hidden;
+            white-space: nowrap; 
         }
 
         body.light-mode .hello-header {
@@ -455,8 +455,6 @@
         body.light-mode a:hover {
             color: #0056b3;
         }
-
-        /* Estilos para a animação de digitação */
         .typing-animation {
             animation: typing 4s steps(24, end) forwards, blink-caret .75s step-end infinite;
         }
@@ -468,7 +466,7 @@
 
         @keyframes blink-caret {
             from, to { color: transparent }
-            50% { color: #61dafb; } /* Cor do cursor */
+            50% { color: #61dafb; } 
         }
     </style>
 </head>
