@@ -30,7 +30,7 @@ Sou um profissional de TI com experiência em criar soluções robustas e eficie
 ## 📊 Estatísticas do GitHub
 
 <p>
-<img align="left" alt="GitHub Stats" height="200" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Felton7JE&theme=tokyonight&layout=compact&custom_title=Tecnologias&langs_count=10" />
+<img align="center" alt="GitHub Stats" height="200" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Felton7JE&theme=tokyonight&layout=compact&custom_title=Tecnologias&langs_count=15" />
 </p>
 
 
