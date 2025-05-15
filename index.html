@@ -1,767 +1,643 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio Dev | Felton da Silva</title>
     <link rel="icon" href="icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto Mono', monospace;
-            transition: background-color 0.3s, color 0.3s;
-        }
 
-        body {
-            background-color: #1e1e1e;
-            color: #c6c6c6;
-            line-height: 1.6;
-        }
+    <script>document.getElementsByTagName("html")[0].className += " js";</script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="style.css">
 
-        body.light-mode {
-            background-color: #f5f7fa;
-            color: #333;
-        }
 
-        .portfolio-section.light-mode,
-        .timeline-section.light-mode,
-        .contact-section.light-mode {
-            background-color: #fff;
-        }
-
-        .portfolio-card.light-mode,
-        .content.light-mode,
-        .contact-form.light-mode {
-            background-color: #fff;
-            color: #333;
-        }
-
-        .main-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 60px;
-        }
-
-        .hello-header {
-            text-align: center;
-            padding: 20px 0;
-            background-color: #282c34;
-            color: #61dafb;
-            font-size: 2rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            white-space: nowrap; 
-        }
-
-        body.light-mode .hello-header {
-            background-color: #f5f7fa;
-            color: #007bff;
-        }
-
-        .portfolio-section {
-            background-color: #282c34;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .portfolio-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .portfolio-card {
-            background: #3e4451;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .portfolio-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .profile {
-            grid-column: span 2;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .profile img {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #61dafb;
-        }
-
-        .profile-info h2 {
-            font-size: 1.8rem;
-            color: #eee;
-            margin-bottom: 5px;
-        }
-
-        .profile-info p {
-            color: #bbb;
-            font-size: 1rem;
-        }
-
-        .experience, .clients, .total-projects {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .experience h3, .clients h3, .total-projects h3 {
-            font-size: 2rem;
-            color: #61dafb;
-            margin-bottom: 5px;
-        }
-
-        .experience p, .clients p, .total-projects p {
-            color: #bbb;
-            font-size: 0.9rem;
-        }
-
-        .collaborate {
-            grid-column: span 3;
-            text-align: center;
-            padding: 30px;
-            background: linear-gradient(135deg, #353a47 0%, #454f61 100%);
-            border-radius: 12px;
-        }
-
-        .collaborate h2 {
-            font-size: 2rem;
-            color: #eee;
-        }
-
-        .collaborate span {
-            color: #61dafb;
-            font-weight: 700;
-        }
-
-        .timeline-section {
-            background-color: #282c34;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .timeline-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .sub-title {
-            font-size: 0.9rem;
-            color: #61dafb;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .title {
-            font-size: 2.2rem;
-            color: #eee;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .timeline::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, #61dafb, #8a63ff);
-            transform: translateX(-50%);
-        }
-
-        .timeline-item {
-            position: relative;
-            display: flex;
-            align-items: center;
-            margin-bottom: 60px;
-        }
-
-        .timeline-item.left {
-            flex-direction: row-reverse;
-            text-align: left;
-        }
-
-        .timeline-item.right {
-            text-align: right;
-        }
-
-        .content {
-            width: 320px;
-            background-color: #3e4451;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease;
-        }
-
-        .content:hover {
-            transform: scale(1.02);
-        }
-
-        .content h3 {
-            color: #eee;
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-
-        .content p {
-            color: #bbb;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .date {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 150px;
-            font-weight: bold;
-            color: #61dafb;
-        }
-
-        .left .date {
-            right: calc(50% + 30px);
-            text-align: right;
-        }
-
-        .right .date {
-            left: calc(50% + 30px);
-            text-align: left;
-        }
-
-        .year {
-            font-size: 1.5rem;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .month {
-            font-size: 0.9rem;
-            color: #8a9bb2;
-            font-weight: 500;
-        }
-
-        .icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            background-color: #3e4451;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: #61dafb;
-            border: 3px solid #61dafb;
-            box-shadow: 0 4px 10px rgba(97, 218, 251, 0.4);
-        }
-
-        @media (max-width: 900px) {
-            .portfolio-container {
-                grid-template-columns: 1fr;
-            }
-
-            .profile, .collaborate {
-                grid-column: span 1;
-            }
-
-            .timeline::before {
-                left: 30px;
-            }
-
-            .timeline-item, .timeline-item.left {
-                flex-direction: column;
-                align-items: flex-start;
-                margin-left: 60px;
-                margin-bottom: 40px;
-            }
-
-            .content {
-                width: 100%;
-            }
-
-            .date {
-                position: relative;
-                top: auto;
-                transform: none;
-                margin-bottom: 10px;
-            }
-
-            .left .date, .right .date {
-                left: auto;
-                right: auto;
-                text-align: left;
-            }
-
-            .icon {
-                left: 0;
-                transform: translateX(-50%);
-            }
-        }
-
-        .skill-icon {
-          font-size: 1.2em;
-          margin-right: 5px;
-            color: #61dafb;
-        }
-
-        footer {
-            background-color: #282c34;
-            color: #bbb;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.8rem;
-        }
-
-        .mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #3e4451;
-            color: #61dafb;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            z-index: 100;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .mode-toggle:hover {
-            background-color: #61dafb;
-            color: #282c34;
-        }
-
-        .contact-section {
-            background-color: #282c34;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .contact-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .contact-form {
-            background-color: #3e4451;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 1rem;
-            color: #eee;
-            margin-bottom: 5px;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            background-color: #4b5363;
-            color: #bbb;
-            font-family: 'Roboto Mono', monospace;
-            font-size: 1rem;
-            resize: vertical;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            box-shadow: 0 0 5px rgba(97, 218, 251, 0.5);
-        }
-
-        button[type="submit"] {
-            background-color: #61dafb;
-            color: #282c34;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-family: 'Roboto Mono', monospace;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #53b4d3;
-        }
-
-        @media (max-width: 600px) {
-            .contact-form {
-                padding: 20px;
-            }
-        }
-
-        a {
-            color: #9ece6a;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        a:hover {
-            color: #61dafb;
-        }
-
-        body.light-mode a {
-            color: #007bff;
-        }
-
-        body.light-mode a:hover {
-            color: #0056b3;
-        }
-        .typing-animation {
-            animation: typing 4s steps(24, end) forwards, blink-caret .75s step-end infinite;
-        }
-
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink-caret {
-            from, to { color: transparent }
-            50% { color: #61dafb; } 
-        }
-    </style>
 </head>
+
 <body>
 
-    <button class="mode-toggle" onclick="toggleDarkMode()">
-        <i class="fas fa-moon"></i> Modo Noturno
-    </button>
+    <!-- Navbar início -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo">Felton Dev</a>
+            <ul class="navbar-menu" id="navbarMenu">
+                <li><a href="#" onclick="scrollToSection('portfolio-section')">Início</a></li>
+                <li><a href="#" onclick="scrollToSection('my-projects-section')">Projetos</a></li>
+                <li><a href="#" onclick="scrollToSection('blog')">Habilidades</a></li>
+                <li><a href="#" onclick="scrollToSection('specialization')">Contato</a></li>
+            </ul>
+            <button class="mode-toggle" onclick="toggleDarkMode()" aria-label="Modo Noturno">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="navbar-toggle" aria-label="Abrir menu" onclick="toggleNavbar()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+    <!-- Navbar fim -->
 
-    <h1 class="hello-header typing-animation">Hello, Bem-vindo ao Meu Perfil...</h1>
 
-    <div class="main-container">
-        <section class="portfolio-section">
-            <div class="portfolio-container">
-                <div class="portfolio-card profile">
-                    <img src="profile.png" alt="Profile">
-                    <div class="profile-info">
-                        <h2>Felton da Silva Joaquim Estevão</h2>
-                        <p>Desenvolvedor de Software | Suporte de TI | Entusiasta Full-Stack</p>
-                    </div>
-                </div>
-                <div class="portfolio-card credentials">
-                    <h3>Certificações <i class="fas fa-certificate"></i></h3>
-                    <p>Java, React, Networking, Suporte de TI</p>
-                </div>
-                <div class="portfolio-card projects">
-                    <h3>Projetos <i class="fas fa-code-branch"></i></h3>
-                    <p>Web Apps, Sistemas, Integrações, Soluções de TI</p>
-                </div>
-                <div class="portfolio-card blog">
-                    <h3>Habilidades <i class="fas fa-tools"></i></h3>
-                    <p>
-                      <i class="fab fa-java skill-icon"></i> Java,
-                      <i class="fab fa-python skill-icon"></i> Python,
-                      <i class="fab fa-react skill-icon"></i> React,
-                      <i class="fab fa-android skill-icon"></i> Flutter,
-                      <i class="fab fa-wordpress skill-icon"></i> WordPress,
-                      <i class="fas fa-database skill-icon"></i> MySQL
-                    </p>
-                </div>
-                <div class="portfolio-card specialization">
-                    <h3>Contato <i class="fas fa-envelope"></i></h3>
-                    <p>
-                        <a href="mailto:dasilvafelton7@gmail.com"><i class="fas fa-envelope"></i> dasilvafelton7@gmail.com</a><br>
-                         <a href="https://www.linkedin.com/in/feltondasilva" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a><br>
-                         <a href="https://wa.me/+2588845120809" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a><br>
-                        <a href="https://github.com/Felton7JE" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                    </p>
-                </div>
-                <div class="portfolio-card experience">
-                    <h3>4+</h3>
-                    <p>Anos de Experiência</p>
-                </div>
-                <div class="portfolio-card clients">
-                    <h3>+15</h3>
-                    <p>Projetos Concluídos</p>
-                </div>
-                <div class="portfolio-card total-projects">
-                    <h3>+5</h3>
-                    <p>Clientes Satisfeitos</p>
-                </div>
-                <div class="portfolio-card collaborate">
-                    <h2>Vamos construir <span>algo grandioso.</span></h2>
+    <section class="portfolio-section ">
+        <div class="portfolio-container">
+            <div class="portfolio-card profile">
+                <img src="profile.png" alt="Profile">
+                <div class="profile-info">
+                    <h2>Felton da Silva Joaquim Estevão</h2>
+                    <p>Desenvolvedor de Software | Suporte de TI | Entusiasta Full-Stack</p>
                 </div>
             </div>
-        </section>
 
-        <section class="timeline-section">
-            <div class="timeline-header">
-                <h3 class="sub-title">MINHA JORNADA</h3>
-                <h1 class="title">Marcos importantes na minha <br>carreira de desenvolvimento</h1>
+
+
+            <div class="portfolio-card projects">
+                <h3>Projetos <i class="fas fa-code-branch"></i></h3>
+                <p>Web Apps, Mobile Apps, Sistemas, Integrações, Soluções de TI</p>
             </div>
+            <div class="portfolio-card blog">
+                <h3>Habilidades <i class="fas fa-tools"></i></h3>
+                <p>
+                    <i class="fab fa-java skill-icon"></i> Java,
+                    <i class="fab fa-python skill-icon"></i> Python,
+                    <i class="fab fa-react skill-icon"></i> React,
+                    <i class="fas fa-mobile-alt skill-icon"></i> Flutter,
+                    <i class="fab fa-wordpress skill-icon"></i> WordPress,
+                    <i class="fas fa-database skill-icon"></i> MySQL,
+                    <i class="fas fa-paper-plane skill-icon"></i> Postman,
+                    <i class="fas fa-ellipsis-h skill-icon"></i> Outros
 
-            <div class="timeline">
+                </p>
+            </div>
+            <div class="portfolio-card specialization">
+                <h3>Contato <i class="fas fa-envelope"></i></h3>
+                <p>
+                    <a href="mailto:dasilvafelton7@gmail.com"><i class="fas fa-envelope"></i>
+                        dasilvafelton7@gmail.com</a><br>
+                    <a href="https://www.linkedin.com/in/feltondasilva" target="_blank"><i class="fab fa-linkedin"></i>
+                        LinkedIn</a><br>
+                    <a href="https://wa.me/+2588845120809" target="_blank"><i class="fab fa-whatsapp"></i>
+                        WhatsApp</a><br>
+                    <a href="https://github.com/Felton7JE" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                </p>
+            </div>
+            <div class="portfolio-card experience">
+                <h3>Interesses <i class="fas fa-code-branch"></i></h3>
 
-                 <div class="timeline-item right">
-                    <div class="content">
-                        <h3>Aplicação McLeanConnect</h3>
-                        <p> [DESCREVER A APLICAÇÃO MCLEANCONNECT AQUI] </p>
-                    </div>
-                    <div class="date">
-                        <span class="year">2025</span>
-                        <span class="month">A Desenvolver</span>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
+                <li><i class="fas fa-shield-alt skill-icon"></i> Cibersegurança</li>
+                <li><i class="fas fa-code skill-icon"></i> Desenvolvimento de Software</li>
+                <li><i class="fas fa-brain skill-icon"></i> Inteligência Artificial</li>
+                <li><i class="fas fa-network-wired skill-icon"></i> Redes e Infraestrutura</li>
+            </div>
+            <div class="portfolio-card clients">
+                <h3>+20</h3>
+                <p>Projetos Concluídos</p>
+            </div>
+            <div class="portfolio-card total-projects">
+                <h3>+5</h3>
+                <p>Clientes Satisfeitos</p>
+            </div>
+            <div class="portfolio-card collaborate">
+                <h2>Vamos construir <span>algo grandioso.</span></h2>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class="my-projects-section">
+        <h2>Meus Top Projetos e Minhas Contribuições</h2>
+        <p>Aqui estão alguns dos meus Top projetos:</p>
+
+        <div class="projects-carousel">
+            <button class="carousel-btn prev" aria-label="Anterior" onclick="scrollProjects(-1)"><i
+                    class="fas fa-chevron-left"></i></button>
+            <div class="carousel-track">
+                <div class="project-card">
+                    <img src="https://www.google.com/s2/favicons?sz=128&domain_url=mcleanconnect.example.com"
+                        alt="McLeanConnect Logo"
+                        style="width:100%;height:120px;object-fit:contain;border-radius:8px;background:#f0f0f0;"
+                        onerror="this.onerror=null;this.src='assets/img/cd-icon-picture.svg';" />
+                    <a href="https://mcleanconnect.example.com" target="_blank">Ver Projeto</a>
                 </div>
-
-                <div class="timeline-item left">
-                    <div class="content">
-                        <h3>Website e E-book de Cibersegurança para Colaboradores de Empresas Moçambicanas</h3>
-                        <p>Desenvolvimento de um website e criação de um e-book abrangente sobre cibersegurança, ambos voltados para colaboradores de empresas moçambicanas. O objetivo é fornecer recursos educativos e práticos para aumentar a conscientização sobre ameaças cibernéticas e promover práticas de segurança eficazes no ambiente corporativo local.</p>
-                    </div>
-                    <div class="date">
-                        <span class="year">2025</span>
-                        <span class="month">A Desenvolver</span>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
+                <div class="project-card">
+                    <img src="https://www.google.com/s2/favicons?sz=128&domain_url=ciberseguranca.example.com"
+                        alt="Cibersegurança Logo"
+                        style="width:100%;height:120px;object-fit:contain;border-radius:8px;background:#f0f0f0;"
+                        onerror="this.onerror=null;this.src='assets/img/cd-icon-picture.svg';" />
+                    <a href="https://ciberseguranca.example.com" target="_blank">Ver Projeto</a>
                 </div>
-
-                 <div class="timeline-item right">
-                    <div class="content">
-                         <h3>Business Logistic & Service Internship (Current)</h3>
-                        <p>Atualmente, sou estagiário na Business Logistic & Service, onde adquiro experiência prática em suporte de TI, administração de redes e desenvolvimento web. Uma das minhas principais tarefas é o desenvolvimento do website da Global Marine Services (ver entrada seguinte).</p>
-
-                    </div>
-                    <div class="date">
-                        <span class="year">2024</span>
-                        <span class="month">JUN 2024 - Presente</span>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
+                <div class="project-card">
+                    <img src="uz.png" alt="Portal UZ Logo"
+                        style="width:100%;height:120px;object-fit:contain;border-radius:8px;background:#f0f0f0;"
+                        onerror="this.onerror=null;this.src='assets/img/cd-icon-picture.svg';" />
+                    <a href="https://unizambeze.github.io/PortalConferencia/" target="_blank">Ver Projeto</a>
                 </div>
-
-                <div class="timeline-item left">
-                    <div class="content">
-                        <h3>Website Global Marine Services (Estágio BLS - Atual)</h3>
-                        <p>Estou desenvolvendo o website da Global Marine Services como parte do meu estágio na Business Logistic & Service. Este website é construído com HTML, CSS e JavaScript, com foco na criação de uma experiência responsiva e amigável ao usuário.</p>
-                         <p><a href="https://gmslda.co.mz/" target="_blank">Visite o Website Global Marine Services</a></p>
-
-                    </div>
-                    <div class="date">
-                        <span class="year">2024</span>
-                        <span class="month">ABR 2024 - Presente</span>
-                    </div>
-                    <div class="icon">
-                        <i class="fab fa-wordpress"></i>
-                    </div>
+                <div class="project-card">
+                    <img src="https://www.google.com/s2/favicons?sz=128&domain_url=felton7je.github.io"
+                        alt="Spring Boot Guia Logo"
+                        style="width:100%;height:120px;object-fit:contain;border-radius:8px;background:#f0f0f0;"
+                        onerror="this.onerror=null;this.src='assets/img/cd-icon-picture.svg';" />
+                    <a href="https://felton7je.github.io/projecto_001/" target="_blank">Ver Projeto</a>
                 </div>
-
-                 <div class="timeline-item right">
-                    <div class="content">
-                        <h3>Estágio na Unizambeze & Website da Conferência</h3>
-                        <p>Realizei um estágio na Unizambeze, adquirindo experiência em reparação e manutenção de computadores, desenvolvimento e design web, suporte de TI e resolução de problemas de rede. Desenhei e desenvolvi o website da conferência científica da universidade usando HTML, CSS, Bootstrap e JavaScript.</p>
-                         <p><a href="https://unizambeze.github.io/PortalConferencia/" target="_blank">Veja o Portal da Conferência UniZambeze</a></p>
-
-                    </div>
-                    <div class="date">
-                        <span class="year">2024</span>
-                        <span class="month">JAN 2024 - MAR 2024</span>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
+                <div class="project-card">
+                    <img src="https://www.google.com/s2/favicons?sz=128&domain_url=github.com" alt="APIs REST Logo"
+                        style="width:100%;height:120px;object-fit:contain;border-radius:8px;background:#f0f0f0;"
+                        onerror="this.onerror=null;this.src='assets/img/cd-icon-picture.svg';" />
+                    <a href="https://github.com/Felton7JE/crud_springboot" target="_blank">GitHub</a>
                 </div>
-
-                 <div class="timeline-item left">
-                    <div class="content">
-                         <h3>Aplicação Web Triplece Solutions</h3>
-                        <p>Desenvolvi o website da Triplece Solutions ( <a href="https://tsolutions.onrender.com/autorizado/index" target="_blank">Triplece Solutions</a> ) como um projeto pessoal usando Spring Boot e MySQL.</p>
-                    </div>
-                    <div class="date">
-                        <span class="year">2024</span>
-                        <span class="month">JAN 2024 - MAR 2024</span>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-code"></i>
-                    </div>
+                <div class="project-card">
+                    <img src="https://www.google.com/s2/favicons?sz=128&domain_url=blslda.co.mz"
+                        alt="Business Logistic Logo"
+                        style="width:100%;height:120px;object-fit:contain;border-radius:8px;background:#f0f0f0;"
+                        onerror="this.onerror=null;this.src='assets/img/cd-icon-picture.svg';" />
+                    <a href="https://blslda.co.mz" target="_blank">Ver Site</a>
                 </div>
-
-                <div class="timeline-item right">
-                    <div class="content">
-                         <h3>Projeto Guia Spring Boot (Atual)</h3>
-                        <p>Atualmente, estou trabalhando em um guia abrangente de Spring Boot para iniciantes, cobrindo a configuração do projeto, a configuração do banco de dados e os testes de API para fornecer uma base sólida para os desenvolvedores. Este guia é construído com HTML, CSS e JavaScript.</p>
-                        <p><a href="https://felton7je.github.io/projecto_001/" target="_blank">Veja o Projeto Guia Spring Boot</a></p>
-
-                    </div>
-
-                    <div class="date">
-                        <span class="year">2023</span>
-                        <span class="month">JUN 2023 - Presente</span>
-                    </div>
-                    <div class="icon">
-                         <i class="fab fa-java"></i>
-                    </div>
+                <div class="project-card">
+                    <img src="gms.png" alt="Global Marine Logo"
+                        style="width:100%;height:120px;object-fit:contain;border-radius:8px;background:#f0f0f0;"
+                        onerror="this.onerror=null;this.src='assets/img/cd-icon-picture.svg';" />
+                    <a href="https://gmslda.co.mz" target="_blank">Ver Site</a>
                 </div>
+            </div>
+            <button class="carousel-btn next" aria-label="Próximo" onclick="scrollProjects(1)"><i
+                    class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
 
-                <div class="timeline-item left">
-                    <div class="content">
-                        <h3>Desenvolvimento Front-End com React.js</h3>
-                        <p>Comecei a aprender React.js e a construir interfaces de usuário interativas. Implementei componentes front-end para aplicações web e aprendi sobre gerenciamento de estado e arquitetura baseada em componentes.</p>
-                    </div>
-                    <div class="date">
-                        <span class="year">2023</span>
-                        <span class="month">MAR 2023</span>
-                    </div>
-                    <div class="icon">
-                        <i class="fab fa-react"></i>
-                    </div>
+
+
+    <script src="assets/js/main.js"></script>
+    <section class="cd-timeline js-cd-timeline">
+        <h2>Minha Jornada Profissional</h2>
+        <div class="container max-width-lg cd-timeline__container">
+
+            <!-- Projetos em andamento -->
+            <div class="cd-timeline__block">
+                <div class="cd-timeline__img cd-timeline__img--picture">
+                    <img src="assets/img/cd-icon-picture.svg" alt="Projetos">
                 </div>
-
-                <div class="timeline-item right">
-                    <div class="content">
-                        <h3>Spring Boot & APIs REST</h3>
-                        <p>Comecei a trabalhar com Spring Boot para construir APIs RESTful. Implementei lógica de backend para aplicações web e aprendi sobre integração de banco de dados com MySQL e PostgreSQL.</p>
-                         <p><a href="https://github.com/Felton7JE/crud_springboot" target="_blank">Veja o projeto Spring Boot CRUD no GitHub</a></p>
-
-                    </div>
-                    <div class="date">
-                        <span class="year">2022</span>
-                        <span class="month">SET 2022</span>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-server"></i>
-                    </div>
-                </div>
-
-                <div class="timeline-item left">
-                    <div class="content">
-                        <h3>Imersão em Desenvolvimento Web</h3>
-                        <p>Mergulhei no desenvolvimento web, aprendendo HTML, CSS e JavaScript. Criei meus primeiros websites estáticos e comecei a experimentar frameworks front-end.</p>
-                    </div>
-                    <div class="date">
-                        <span class="year">2021</span>
-                        <span class="month">DEZ 2021</span>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                </div>
-
-                <div class="timeline-item right">
-                    <div class="content">
-                        <h3>Primeiros Passos em Java</h3>
-                        <p>Comecei a aprender Java, focando em princípios de orientação a objetos e estruturas de dados. Construí aplicações de console simples e explorei o básico do ecossistema Java.</p>
-                    </div>
-                    <div class="date">
-                        <span class="year">2021</span>
-                        <span class="month">JUN 2021</span>
-                    </div>
-                    <div class="icon">
-                        <i class="fab fa-java"></i>
+                <div class="cd-timeline__content text-component">
+                    <h2>McLeanConnect</h2>
+                    <div class="flex justify-between items-center flex-wrap gap-2">
+                        <p class="color-contrast-medium">
+                            Plataforma móvel inovadora com foco em integração de serviços e experiência intuitiva.<br>
+                            <a href="https://mcleanconnect.example.com" target="_blank">Acessar McLeanConnect</a>
+                        </p>
+                        <div class="flex gap-2">
+                            <img src="https://img.icons8.com/color/32/000000/flutter.png" alt="Flutter" title="Flutter">
+                            <img src="https://img.icons8.com/color/32/000000/firebase.png" alt="Firebase"
+                                title="Firebase">
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <section class="contact-section">
-            <div class="contact-header">
-                <h3 class="sub-title">CONTATE-ME</h3>
+            <div class="cd-timeline__block">
+                <div class="cd-timeline__img cd-timeline__img--picture">
+                    <img src="assets/img/cd-icon-picture.svg" alt="Cybersegurança">
+                </div>
+                <div class="cd-timeline__content text-component">
+                    <h2>Website & E-book de Segurança Cibernética</h2>
+                    <div class="flex justify-between items-center flex-wrap gap-2">
+                        <p class="color-contrast-medium">
+                            Portal educativo para colaboradores de empresas moçambicanas promovendo a cultura de
+                            cibersegurança.<br>
+                            <a href="https://ciberseguranca.example.com" target="_blank">Acessar Website & E-book</a>
+                        </p>
+                        <div class="flex gap-2">
+                            <img src="https://img.icons8.com/color/32/000000/html-5--v1.png" alt="HTML" title="HTML">
+                            <img src="https://img.icons8.com/color/32/000000/css3.png" alt="CSS" title="CSS">
+                            <img src="https://img.icons8.com/color/32/000000/javascript--v1.png" alt="JavaScript"
+                                title="JavaScript">
+                            <img src="https://img.icons8.com/color/32/000000/canva.png" alt="Canva" title="Canva">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="cd-timeline__date">2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Abril 2025 - Presente -->
+            <div class="cd-timeline__block">
+                <div class="cd-timeline__img cd-timeline__img--location">
+                    <img src="assets/img/cd-icon-location.svg" alt="Business Logistic">
+                </div>
+                <div class="cd-timeline__content text-component">
+                    <h2>Estágio - Business Logistic & Service</h2>
+                    <div class="flex justify-between items-start flex-wrap gap-2">
+                        <p class="color-contrast-medium">
+                            <strong>Suporte Help Desk:</strong> atendimento a chamados internos, diagnóstico e resolução
+                            de problemas.<br>
+                            <strong>Administração de Redes e Windows Server:</strong> configuração de switches,
+                            roteadores e Active Directory.<br>
+                            <strong>Desenvolvimento Web:</strong> site da <a href="https://businesslogistic.example.com"
+                                target="_blank">Business Logistic & Service</a> e portal <a
+                                href="https://globalmarine.example.com" target="_blank">Global Marine Services</a>.<br>
+                            <strong>Workshops de Cibersegurança:</strong> boas práticas de segurança e proteção de
+                            dados.<br>
+                            <strong>Microsoft 365:</strong> gestão de Outlook, Teams e SharePoint.
+                        </p>
+                        <div class="flex gap-2">
+                            <img src="https://img.icons8.com/color/32/000000/html-5--v1.png" alt="HTML" title="HTML">
+                            <img src="https://img.icons8.com/color/32/000000/css3.png" alt="CSS" title="CSS">
+                            <img src="https://img.icons8.com/color/32/000000/javascript--v1.png" alt="JavaScript"
+                                title="JavaScript">
+                            <img src="https://img.icons8.com/color/32/000000/active-directory.png"
+                                alt="Active Directory" title="Active Directory">
+                            <img src="https://img.icons8.com/color/32/000000/microsoft-365.png" alt="M365"
+                                title="Microsoft 365">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="cd-timeline__date">Abril 2025 - Presente</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jan-Mar 2024 -->
+            <div class="cd-timeline__block">
+                <div class="cd-timeline__img cd-timeline__img--location">
+                    <img src="assets/img/cd-icon-location.svg" alt="Zambeze">
+                </div>
+                <div class="cd-timeline__content text-component">
+                    <h2>Estágio - Universidade Zambeze</h2>
+                    <div class="flex justify-between items-start flex-wrap gap-2">
+                        <p class="color-contrast-medium">
+                            <strong>Suporte Técnico:</strong> manutenção de computadores e configuração de LAN.<br>
+                            <strong>Portal da Conferência Científica:</strong> desenvolvido com HTML, CSS, Bootstrap e
+                            JS.<br>
+                            <a href="https://conferenciazambeze.example.com" target="_blank">Acessar Portal</a><br>
+                            <strong>Sistema de Gestão de Equipamentos:</strong> controle de cadastro, empréstimo e
+                            devolução de hardware.<br>
+                            <strong>Outras atividades:</strong> documentação e treinamento de voluntários.
+                        </p>
+                        <div class="flex gap-2">
+                            <img src="https://img.icons8.com/color/32/000000/html-5--v1.png" alt="HTML" title="HTML">
+                            <img src="https://img.icons8.com/color/32/000000/css3.png" alt="CSS" title="CSS">
+                            <img src="https://img.icons8.com/color/32/000000/bootstrap.png" alt="Bootstrap"
+                                title="Bootstrap">
+                            <img src="https://img.icons8.com/color/32/000000/javascript--v1.png" alt="JavaScript"
+                                title="JavaScript">
+                            <img src="https://img.icons8.com/color/32/000000/php.png" alt="PHP" title="PHP">
+                            <img src="https://img.icons8.com/color/32/000000/mysql-logo.png" alt="MySQL" title="MySQL">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="cd-timeline__date">Jan - Mar 2024</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Junho 2023 -->
+            <div class="cd-timeline__block">
+                <div class="cd-timeline__img cd-timeline__img--movie">
+                    <img src="assets/img/cd-icon-movie.svg" alt="Guia">
+                </div>
+                <div class="cd-timeline__content text-component">
+                    <h2>Guia Prático de Spring Boot</h2>
+                    <div class="flex justify-between items-center flex-wrap gap-2">
+                        <p class="color-contrast-medium">
+                            Manual passo a passo para iniciantes com configuração de projetos, banco de dados e testes
+                            de API.<br>
+                            <a href="https://felton7je.github.io/projecto_001/" target="_blank">Acessar guia</a>
+                        </p>
+                        <div class="flex gap-2">
+                            <img src="https://img.icons8.com/color/32/000000/java-coffee-cup-logo--v1.png" alt="Java"
+                                title="Java">
+                            <img src="https://img.icons8.com/color/32/000000/spring-logo.png" alt="Spring Boot"
+                                title="Spring Boot">
+                            <img src="https://img.icons8.com/color/32/000000/junit.png" alt="JUnit" title="JUnit">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="cd-timeline__date">Junho 2023</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Março 2023 -->
+            <div class="cd-timeline__block">
+                <div class="cd-timeline__img cd-timeline__img--picture">
+                    <img src="assets/img/cd-icon-picture.svg" alt="React">
+                </div>
+                <div class="cd-timeline__content text-component">
+                    <h2>Desenvolvimento com React.js</h2>
+                    <div class="flex justify-between items-center flex-wrap gap-2">
+                        <p class="color-contrast-medium">
+                            Construção de interfaces interativas, roteamento e gerenciamento de estado com React.js.
+                        </p>
+                        <div class="flex gap-2">
+                            <img src="https://img.icons8.com/color/32/000000/react-native.png" alt="React.js"
+                                title="React.js">
+                            <img src="https://img.icons8.com/color/32/000000/redux.png" alt="Redux" title="Redux">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="cd-timeline__date">Março 2023</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Setembro 2022 -->
+            <div class="cd-timeline__block">
+                <div class="cd-timeline__img cd-timeline__img--movie">
+                    <img src="assets/img/cd-icon-movie.svg" alt="API">
+                </div>
+                <div class="cd-timeline__content text-component">
+                    <h2>APIs REST com Spring Boot</h2>
+                    <div class="flex justify-between items-center flex-wrap gap-2">
+                        <p class="color-contrast-medium">
+                            Desenvolvimento de serviços RESTful em Java com integração de bancos de dados MySQL e
+                            PostgreSQL.<br>
+                            <a href="https://github.com/Felton7JE/crud_springboot" target="_blank">Ver projeto no
+                                GitHub</a>
+                        </p>
+                        <div class="flex gap-2">
+                            <img src="https://img.icons8.com/color/32/000000/java-coffee-cup-logo--v1.png" alt="Java"
+                                title="Java">
+                            <img src="https://img.icons8.com/color/32/000000/spring-logo.png" alt="Spring Boot"
+                                title="Spring Boot">
+                            <img src="https://img.icons8.com/color/32/000000/mysql-logo.png" alt="MySQL" title="MySQL">
+                            <img src="https://img.icons8.com/color/32/000000/postgresql.png" alt="PostgreSQL"
+                                title="PostgreSQL">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="cd-timeline__date">Setembro 2022</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dezembro 2021 -->
+            <div class="cd-timeline__block">
+                <div class="cd-timeline__img cd-timeline__img--picture">
+                    <img src="assets/img/cd-icon-picture.svg" alt="Web Dev">
+                </div>
+                <div class="cd-timeline__content text-component">
+                    <h2>Imersão em Desenvolvimento Web</h2>
+                    <div class="flex justify-between items-center flex-wrap gap-2">
+                        <p class="color-contrast-medium">
+                            Criação dos primeiros sites estáticos com HTML, CSS e JavaScript.<br>
+                            Introdução a frameworks front-end e boas práticas de responsividade.
+                        </p>
+                        <div class="flex gap-2">
+                            <img src="https://img.icons8.com/color/32/000000/html-5--v1.png" alt="HTML" title="HTML">
+                            <img src="https://img.icons8.com/color/32/000000/css3.png" alt="CSS" title="CSS">
+                            <img src="https://img.icons8.com/color/32/000000/javascript--v1.png" alt="JavaScript"
+                                title="JavaScript">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="cd-timeline__date">Dezembro 2021</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Junho 2021 -->
+            <div class="cd-timeline__block">
+                <div class="cd-timeline__img cd-timeline__img--movie">
+                    <img src="assets/img/cd-icon-movie.svg" alt="Java">
+                </div>
+                <div class="cd-timeline__content text-component">
+                    <h2>Primeiros Passos em Java</h2>
+                    <div class="flex justify-between items-center flex-wrap gap-2">
+                        <p class="color-contrast-medium">
+                            Estudo de orientação a objetos, estruturas de dados e criação de aplicações de console
+                            simples.
+                        </p>
+                        <div class="flex gap-2">
+                            <img src="https://img.icons8.com/color/32/000000/java-coffee-cup-logo--v1.png" alt="Java"
+                                title="Java">
+                            <img src="https://img.icons8.com/color/32/000000/intellij-idea.png" alt="IntelliJ"
+                                title="IntelliJ">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="cd-timeline__date">Junho 2021</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="my-certifications-section">
+        <h2>Minhas Certificações</h2>
+        <p>Algumas das certificações e conquistas profissionais:</p>
+        <div class="certifications-carousel">
+            <button class="carousel-btn prev" aria-label="Anterior" onclick="scrollCertifications(-1)"><i
+                    class="fas fa-chevron-left"></i></button>
+            <div class="carousel-track certifications-track">
+                <div class="certification-card">
+                    <img src="cisco.svg" alt="Cisco" class="cert-logo">
+                    <h3>Networking Basics</h3>
+                    <p class="cert-org">Cisco</p>
+                    <p class="cert-date">Emitido: mai de 2025</p>
+                    <a href="https://www.credly.com/badges/fe0c0e61-1cc3-47b2-ac05-096233f12ac4/linked_in_profile"
+                        target="_blank" class="cert-link">Exibir credencial</a>
+                </div>
+                <div class="certification-card">
+                    <img src="cisco.svg" alt="Cisco" class="cert-logo">
+                    <h3>Networking Devices and Initial Configuration</h3>
+                    <p class="cert-org">Cisco</p>
+                    <p class="cert-date">Emitido: mai de 2025</p>
+                    <a href="https://www.credly.com/badges/b8adf5de-a846-4546-adba-0d6edb971e67/linked_in_profile"
+                        target="_blank" class="cert-link">Exibir credencial</a>
+                </div>
+                <div class="certification-card">
+                    <img src="cisco.svg" alt="Cisco" class="cert-logo">
+                    <h3>Introduction to Cybersecurity</h3>
+                    <p class="cert-org">Cisco</p>
+                    <p class="cert-date">Emitido: abr de 2025</p>
+                    <a href="https://www.credly.com/badges/7362c856-e434-4bae-9d72-d3453e54766d/linked_in_profile"
+                        target="_blank" class="cert-link">Exibir credencial</a>
+                </div>
+                <div class="certification-card">
+                    <img src="https://avatars.githubusercontent.com/u/28929274?s=200&v=4" alt="Rocketseat"
+                        class="cert-logo">
+                    <h3>NLW Pocket: Mobile - React Native</h3>
+                    <p class="cert-org">Rocketseat</p>
+                    <p class="cert-date">Emitido: dez de 2024</p>
+                    <p class="cert-code">Código: b3b4b0fe-c583-428d-ba41-bea0602a92bd</p>
+                    <a href="https://app.rocketseat.com.br/certificates/b3b4b0fe-c583-428d-ba41-bea0602a92bd"
+                        target="_blank" class="cert-link">Exibir credencial</a>
+                </div>
+                <div class="certification-card">
+                    <img src="https://avatars.githubusercontent.com/u/28929274?s=200&v=4" alt="Rocketseat"
+                        class="cert-logo">
+                    <h3>NLW Expert trilha de Java</h3>
+                    <p class="cert-org">Rocketseat</p>
+                    <p class="cert-date">Emitido: fev de 2024</p>
+                    <p class="cert-code">Código: c98135a8-ca70-493b-ad5c-1d2d0bff7ede</p>
+                    <a href="https://app.rocketseat.com.br/certificates/c98135a8-ca70-493b-ad5c-1d2d0bff7ede"
+                        target="_blank" class="cert-link">Exibir credencial</a>
+                </div>
+                <div class="certification-card">
+                    <img src="assets/img/cd-icon-picture.svg" alt="Editorial Fundza" class="cert-logo">
+                    <h3>Concurso Desenvolvimento de Sistema de Gestão</h3>
+                    <p class="cert-org">Editorial Fundza</p>
+                    <p class="cert-date">Competências: Desenvolvimento aplicativos para desktop, Banco de dados,
+                        Desenvolvimento de software, Desenvolvimento de back-end</p>
+                </div>
+            </div>
+            <button class="carousel-btn next" aria-label="Próximo" onclick="scrollCertifications(1)"><i
+                    class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
+
+
+    <section class="contact-section">
+        <div class="contact-header">
+            <h2>CONTATE-ME</h3>
                 <h1 class="title">Vamos conversar!</h1>
+        </div>
+        <form class="contact-form">
+            <div class="form-group">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required>
             </div>
-            <form class="contact-form">
-                <div class="form-group">
-                    <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Mensagem:</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit">Enviar Mensagem</button>
-            </form>
-        </section>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Mensagem:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit">Enviar Mensagem</button>
+        </form>
+    </section>
     </div>
 
-    <footer>
-        © 2024 Felton da Silva. Todos os direitos reservados.
+    <footer class="footer">
+        <div class="footer-content">
+            <span>© 2025 Felton da Silva. Todos os direitos reservados.</span>
+            <div class="footer-socials">
+                <a href="https://github.com/Felton7JE" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/felton7je/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:felton7je@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
     </footer>
 
     <script>
         function toggleDarkMode() {
+            // Alterna o modo claro no body
             document.body.classList.toggle('light-mode');
-            document.querySelector('.portfolio-section').classList.toggle('light-mode');
-            document.querySelector('.timeline-section').classList.toggle('light-mode');
-            document.querySelector('.contact-section').classList.toggle('light-mode');
 
-            const portfolioCards = document.querySelectorAll('.portfolio-card');
-            portfolioCards.forEach(card => card.classList.toggle('light-mode'));
+            // Alterna o modo claro nas principais seções
+            const sections = [
+                document.querySelector('.portfolio-section'),
+                document.querySelector('.contact-section'),
+                document.querySelector('.my-projects-section'),
+                document.querySelector('.cd-timeline'),
+                document.querySelector('.my-certifications-section')
+            ];
+            sections.forEach(section => {
+                if (section) section.classList.toggle('light-mode');
+            });
 
-            const contents = document.querySelectorAll('.content');
-            contents.forEach(content => content.classList.toggle('light-mode'));
+            // Alterna o modo claro em todos os cards do portfólio
+            document.querySelectorAll('.portfolio-card').forEach(card => {
+                card.classList.toggle('light-mode');
+            });
 
+            // Alterna o modo claro em todos os blocos e conteúdos da timeline
+            document.querySelectorAll('.cd-timeline__content').forEach(el => el.classList.toggle('light-mode'));
+            document.querySelectorAll('.cd-timeline__block').forEach(el => el.classList.toggle('light-mode'));
+
+            // Alterna o modo claro no formulário de contato
             const contactForm = document.querySelector('.contact-form');
             if (contactForm) {
                 contactForm.classList.toggle('light-mode');
             }
 
+            // Sincroniza o modo claro nos cartões de certificação
+            const isLight = document.body.classList.contains('light-mode');
+            document.querySelectorAll('.certification-card').forEach(card => {
+                if (isLight) {
+                    card.classList.add('light-mode');
+                } else {
+                    card.classList.remove('light-mode');
+                }
+            });
+
+            // Alterna o modo claro no cabeçalho de saudação, se existir
             const helloHeader = document.querySelector('.hello-header');
-            if (document.body.classList.contains('light-mode')) {
-                helloHeader.style.backgroundColor = '#f5f7fa';
-                helloHeader.style.color = '#007bff';
-            } else {
-                helloHeader.style.backgroundColor = '#282c34';
-                helloHeader.style.color = '#61dafb';
+            if (helloHeader) {
+                if (document.body.classList.contains('light-mode')) {
+                    helloHeader.style.backgroundColor = '#f5f7fa';
+                    helloHeader.style.color = '#007bff';
+                } else {
+                    helloHeader.style.backgroundColor = '#282c34';
+                    helloHeader.style.color = '#61dafb';
+                }
+            }
+
+            // Alterna o modo claro no footer
+            const footer = document.querySelector('footer');
+            if (footer) {
+                footer.classList.toggle('light-mode', document.body.classList.contains('light-mode'));
+            }
+        }
+
+        function scrollProjects(direction) {
+            const track = document.querySelector('.carousel-track');
+            const cards = track.querySelectorAll('.project-card');
+            const card = cards[0];
+            const cardWidth = card.offsetWidth + 16; // 16px gap
+            // Carrossel giratório infinito: move o primeiro/último card para o final/início
+            if (direction > 0) {
+                track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+                setTimeout(() => {
+                    track.appendChild(cards[0]);
+                    track.scrollBy({ left: -cardWidth, behavior: 'auto' });
+                }, 350);
+            } else if (direction < 0) {
+                track.insertBefore(cards[cards.length - 1], cards[0]);
+                track.scrollBy({ left: -cardWidth, behavior: 'auto' });
+                setTimeout(() => {
+                    track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+                }, 10);
+            }
+        }
+
+        function scrollCertifications(direction) {
+            const track = document.querySelector('.certifications-track');
+            const cards = track.querySelectorAll('.certification-card');
+            const card = cards[0];
+            const cardWidth = card.offsetWidth + 16; // 16px gap
+            // Carrossel giratório infinito: move o primeiro/último card para o final/início
+            if (direction > 0) {
+                track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+                setTimeout(() => {
+                    track.appendChild(cards[0]);
+                    track.scrollBy({ left: -cardWidth, behavior: 'auto' });
+                }, 350);
+            } else if (direction < 0) {
+                track.insertBefore(cards[cards.length - 1], cards[0]);
+                track.scrollBy({ left: -cardWidth, behavior: 'auto' });
+                setTimeout(() => {
+                    track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+                }, 10);
+            }
+        }
+
+        function toggleNavbar() {
+            const menu = document.getElementById('navbarMenu');
+            menu.classList.toggle('active');
+        }
+
+        function scrollToSection(sectionClass) {
+            const section = document.querySelector(`.${sectionClass}`);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
             }
         }
     </script>
 </body>
+
 </html>
