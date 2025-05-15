@@ -743,6 +743,7 @@ footer {
         border-radius: 0 0 12px 12px;
         box-shadow: 0 8px 24px #e5091422;
         display: none;
+        z-index: 230;
     }
     .navbar-menu.open {
         display: flex;
@@ -753,6 +754,24 @@ footer {
     }
     .navbar-toggle {
         display: block;
+        z-index: 220;
+    }
+    .mode-toggle {
+        position: absolute;
+        top: 12px;
+        right: 54px;
+        z-index: 210;
+    }
+}
+
+@media (max-width: 600px) {
+    .mode-toggle {
+        position: absolute;
+        top: 12px;
+        right: 54px;
+        z-index: 210;
+        padding: 8px 12px;
+        font-size: 1rem;
     }
 }
 
