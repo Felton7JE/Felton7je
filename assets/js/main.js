@@ -74,16 +74,24 @@
     menu.classList.toggle('open');
   }
 
-  function scrollToSection(className) {
-    const section = document.querySelector('.' + className);
-    if (section) {
-      window.scrollTo({
-        top: section.offsetTop - 60,
-        behavior: 'smooth'
-      });
-      // Fecha o menu mobile após clicar
-      const menu = document.getElementById('navbarMenu');
-      if (menu.classList.contains('open')) menu.classList.remove('open');
+  // Fecha o menu mobile ao clicar em um link do menu
+  function closeNavbarOnLinkClick() {
+    const menu = document.getElementById('navbarMenu');
+    if (menu.classList.contains('open')) {
+      menu.classList.remove('open');
+    }
+  }
+
+  // Fecha o menu mobile ao clicar fora dele (em mobile)
+  function closeNavbarOnOutsideClick(e) {
+    const menu = document.getElementById('navbarMenu');
+    const toggleBtn = document.querySelector('.navbar-toggle');
+    if (
+      menu.classList.contains('open') &&
+      !menu.contains(e.target) &&
+      !toggleBtn.contains(e.target)
+    ) {
+      menu.classList.remove('open');
     }
   }
 
@@ -124,5 +132,27 @@
   }
 
   window.addEventListener('scroll', highlightNavbarOnScroll);
-  window.addEventListener('DOMContentLoaded', highlightNavbarOnScroll);
+  window.addEventListener('DOMContentLoaded', function() {
+    highlightNavbarOnScroll();
+
+    // Adiciona evento para fechar o menu ao clicar em um link
+    document.querySelectorAll('.navbar-menu li a').forEach(link => {
+      link.addEventListener('click', closeNavbarOnLinkClick);
+    });
+
+    // Adiciona evento para fechar o menu ao clicar fora dele (mobile)
+    document.addEventListener('click', closeNavbarOnOutsideClick);
+  });
+
+  // Expor funções para o escopo global
+  window.toggleNavbar = toggleNavbar;
+
+  // Adiciona scrollToSection ao escopo global
+  window.scrollToSection = function(sectionClass) {
+    const section = document.querySelector(`.${sectionClass}`);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
 })();

@@ -11,9 +11,21 @@
     <script>document.getElementsByTagName("html")[0].className += " js";</script>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="style.css">
+    <script src="assets/js/mail.js"></script>
 
 
 </head>
+
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "_CXPdJjiaOu6wO8B1",
+      });
+   })();
+</script>
 
 <body>
 
@@ -69,7 +81,8 @@
                 </p>
             </div>
             <div class="portfolio-card specialization">
-                <h3>Contato <i class="fas fa-envelope"></i></h3>
+                                <h3>Contato <i class="fas fa-code-branch"></i></h3>
+
                 <p>
                     <a href="mailto:dasilvafelton7@gmail.com"><i class="fas fa-envelope"></i>
                         dasilvafelton7@gmail.com</a><br>
@@ -504,10 +517,13 @@
                 <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
+                <label for="subject">Assunto:</label>
+                <input type="text" id="subject" name="subject" required>
+            <div class="form-group">
                 <label for="message">Mensagem:</label>
                 <textarea id="message" name="message" rows="5" required></textarea>
             </div>
-            <button type="submit">Enviar Mensagem</button>
+            <button type="submit" onclick="sendMail()">Enviar Mensagem</button>
         </form>
     </section>
     </div>
