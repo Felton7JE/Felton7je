@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Felton da Silva - CV</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0f0f1e;
+        --card: #1a1a2e;
+        --text: #e0e0e0;
+        --muted: #8a8a9e;
+        --cyan: #06b6d4;
+        --purple: #a855f7;
+        --border: #2d2d44;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, Arial, sans-serif;
+        background: radial-gradient(circle at top, rgba(168,85,247,0.12), transparent 32%), var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+      .page {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 40px 24px 56px;
+      }
+      .hero {
+        border: 1px solid rgba(168,85,247,0.35);
+        border-radius: 24px;
+        background: rgba(26,26,46,0.8);
+        padding: 32px;
+      }
+      .eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--cyan);
+      }
+      h1 {
+        margin: 10px 0 8px;
+        font-size: 42px;
+        line-height: 1.05;
+        color: var(--purple);
+      }
+      h2 {
+        margin: 0 0 14px;
+        font-size: 22px;
+      }
+      .muted { color: var(--muted); }
+      .grid {
+        display: grid;
+        gap: 18px;
+        margin-top: 22px;
+      }
+      .section {
+        background: rgba(26,26,46,0.65);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 22px;
+      }
+      .section h3 {
+        margin: 0 0 12px;
+        color: var(--cyan);
+        font-size: 16px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-family: "IBM Plex Mono", monospace;
+      }
+      .item { margin-bottom: 18px; }
+      .item:last-child { margin-bottom: 0; }
+      .item strong { display: block; font-size: 18px; margin-bottom: 2px; }
+      .item .meta { font-size: 14px; color: var(--muted); margin-bottom: 6px; }
+      ul { margin: 10px 0 0; padding-left: 18px; }
+      li { margin-bottom: 6px; }
+      .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+      .chip {
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 13px;
+        color: var(--muted);
+        background: rgba(255,255,255,0.03);
+      }
+      .footer {
+        margin-top: 22px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        color: var(--muted);
+        text-align: center;
+      }
+      @media print {
+        body { background: #fff; color: #111; }
+        .page { padding: 0; max-width: none; }
+        .hero, .section { break-inside: avoid; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <div class="eyebrow">Felton da Silva Joaquim Estevão</div>
+        <h1>CV</h1>
+        <p class="muted">Engenheiro de Software, Gestor de Infraestrutura de TI e desenvolvedor focado em impacto real, liderança e execução prática.</p>
+        <p class="muted"><strong>Email:</strong> dasilvafelton7@gmail.com · <strong>GitHub:</strong> github.com/Felton7JE · <strong>LinkedIn:</strong> linkedin.com/in/estevafelton</p>
+      </section>
+
+      <div class="grid">
+        <section class="section">
+          <h3>Experiência</h3>
+          <div class="item">
+            <strong>Business Logistics & Services, Lda</strong>
+            <div class="meta">Engenheiro de Software e Gestor de Infraestrutura de TI · Beira, Sofala · Março 2025– Novembro 2025</div>
+            <ul>
+              <li>Liderança da transformação digital e desenvolvimento do novo portal corporativo.</li>
+              <li>Presença web para Global Marine Services com foco em SEO e UX/UI.</li>
+              <li>Gestão de Windows Server, Active Directory, Microsoft 365 e redes.</li>
+              <li>Protocolos de cibersegurança, suporte N2/N3 e workshops internos.</li>
+            </ul>
+          </div>
+          <div class="item">
+            <strong>MUCASSA, Lda</strong>
+            <div class="meta">Desenvolvedor de Sistemas de Informática · Beira, Sofala · Junho 2024– Janeiro 2025</div>
+            <ul>
+              <li>Aplicações web e mobile com Flutter, Django, JavaScript e WordPress.</li>
+              <li>Diagnóstico de conectividade, redes e manutenção evolutiva de sistemas legados.</li>
+              <li>Participação no SDLC do levantamento ao deploy e suporte pós-implementação.</li>
+            </ul>
+          </div>
+          <div class="item">
+            <strong>CETIC – Universidade Zambeze</strong>
+            <div class="meta">Engenheiro de Desenvolvimento de Software (Estágio) · Beira, Sofala · Março 2024– Setembro 2025</div>
+            <ul>
+              <li>SGDE para gestão de activos de TI e portal da conferência científica.</li>
+              <li>Manutenção preventiva/correctiva de computadores e redes locais.</li>
+              <li>Documentação técnica e apoio a novos estagiários.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section">
+          <h3>Formação e liderança</h3>
+          <div class="item">
+            <strong>Universidade Zambeze</strong>
+            <div class="meta">Licenciatura em Engenharia Informática · Conclusão: Dezembro 2025</div>
+          </div>
+          <div class="item">
+            <strong>Vodacom Code Like a Girl</strong>
+            <div class="meta">Instrutor voluntário de tecnologias web</div>
+          </div>
+          <div class="item">
+            <strong>Django Girls Moçambique</strong>
+            <div class="meta">Mentor técnico em workshop local</div>
+          </div>
+          <div class="item">
+            <strong>Younglife</strong>
+            <div class="meta">Líder de jovens</div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h3>Habilidades</h3>
+          <div class="chips">
+            <span class="chip">Flutter</span><span class="chip">React Native</span><span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">Python</span><span class="chip">Django</span><span class="chip">JavaScript</span><span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">WordPress</span><span class="chip">Windows Server</span><span class="chip">Active Directory</span><span class="chip">LAN/WAN</span><span class="chip">Microsoft 365</span><span class="chip">Git/GitHub</span><span class="chip">Docker</span><span class="chip">Jira</span><span class="chip">MySQL</span><span class="chip">PostgreSQL</span><span class="chip">Scrum</span><span class="chip">Kanban</span><span class="chip">Cibersegurança</span>
+          </div>
+        </section>
+      </div>
+
+      <div class="footer">A minha jornada continua a crescer com tecnologia, liderança e impacto real.</div>
+    </main>
+  </body>
+</html>

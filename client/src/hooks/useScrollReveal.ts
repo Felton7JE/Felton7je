@@ -1,0 +1,34 @@
+import { useEffect, useRef, useState } from 'react';
+
+/**
+ * Hook para revelar elementos quando entram na viewport
+ * Útil para animações ao scroll
+ */
+export const useScrollReveal = (options = {}) => {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        observer.unobserve(entry.target);
+      }
+    }, {
+      threshold: 0.1,
+      ...options,
+    });
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [options]);
+
+  return { ref, isVisible };
+};
