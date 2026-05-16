@@ -15,6 +15,7 @@ import {
   Linkedin,
   Mail,
   MapPin,
+  Send,
   ShieldCheck,
   Sparkles,
   Trophy,
@@ -159,6 +160,19 @@ export default function Home() {
   const [siteTransitionPhase, setSiteTransitionPhase] = useState<'idle' | 'impact' | 'destroying' | 'destroyed'>('idle');
   const [certificationPage, setCertificationPage] = useState(0);
   const [selectedCvItem, setSelectedCvItem] = useState<CvTimelineItem | null>(null);
+  const [emailFlight, setEmailFlight] = useState<{
+    id: number;
+    from: { x: number; y: number };
+    to: { x: number; y: number };
+  } | null>(null);
+  const [projectFlight, setProjectFlight] = useState<{
+    id: number;
+    from: { x: number; y: number };
+    to: { x: number; y: number };
+    project: (typeof projects)[number];
+  } | null>(null);
+  const emailButtonRef = useRef<HTMLDivElement | null>(null);
+  const emailTargetRef = useRef<HTMLAnchorElement | null>(null);
 
   const projects = [
     {
@@ -313,6 +327,14 @@ export default function Home() {
   const [imageZoom, setImageZoom] = useState(1);
   const [isScrollMode, setIsScrollMode] = useState(false);
   const detailRef = useRef<HTMLDivElement | null>(null);
+  const worksRef = useRef<HTMLElement | null>(null);
+
+  const [sectionFlight, setSectionFlight] = useState<{
+    id: number;
+    from: { x: number; y: number };
+    to: { x: number; y: number };
+    label: string;
+  } | null>(null);
 
   const projectsPerPage = 4;
   const totalProjectPages = Math.max(1, Math.ceil(projects.length / projectsPerPage));
@@ -456,6 +478,154 @@ export default function Home() {
     setSiteTransitionPhase('impact');
     window.setTimeout(() => setSiteTransitionPhase('destroying'), 700);
     window.setTimeout(() => setSiteTransitionPhase('destroyed'), 3000);
+  };
+
+  const launchEmailFlight = () => {
+    if (emailFlight) {
+      return;
+    }
+
+    const buttonRect = emailButtonRef.current?.getBoundingClientRect();
+    const targetRect = emailTargetRef.current?.getBoundingClientRect();
+
+    if (!buttonRect || !targetRect) {
+      emailTargetRef.current?.click();
+      return;
+    }
+
+    const from = {
+      x: buttonRect.left + buttonRect.width / 2 - 18,
+      y: buttonRect.top + buttonRect.height / 2 - 18,
+    };
+    const to = {
+      x: targetRect.left + targetRect.width / 2 - 18,
+      y: targetRect.top + targetRect.height / 2 - 18,
+    };
+
+    const flightId = Date.now();
+    setEmailFlight({ id: flightId, from, to });
+
+    window.setTimeout(() => {
+      emailTargetRef.current?.click();
+      setEmailFlight((currentFlight) => (currentFlight?.id === flightId ? null : currentFlight));
+    }, 1050);
+  };
+
+  const launchProjectFlight = (
+    project: (typeof projects)[number],
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    event.stopPropagation();
+
+    if (projectFlight) {
+      return;
+    }
+
+    const buttonRect = event.currentTarget.getBoundingClientRect();
+    const targetRect = detailRef.current?.getBoundingClientRect();
+
+    if (!targetRect) {
+      setSelectedProject(project);
+      setSelectedProjectImage(project.images?.[0] ?? null);
+      setTimeout(() => {
+        detailRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 120);
+      return;
+    }
+
+    const from = {
+      x: buttonRect.left + buttonRect.width / 2 - 18,
+      y: buttonRect.top + buttonRect.height / 2 - 18,
+    };
+    const to = {
+      x: targetRect.left + targetRect.width / 2 - 18,
+      y: targetRect.top + targetRect.height / 2 - 18,
+    };
+
+    const flightId = Date.now();
+    setProjectFlight({ id: flightId, from, to, project });
+
+    window.setTimeout(() => {
+      setSelectedProject(project);
+      setSelectedProjectImage(project.images?.[0] ?? null);
+      detailRef.current?.scrollIntoView({ behavior: 'smooth' });
+      setProjectFlight((currentFlight) => (currentFlight?.id === flightId ? null : currentFlight));
+    }, 1050);
+  };
+
+  const openProjectLinkWithFlight = (
+    project: (typeof projects)[number],
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    event.stopPropagation();
+
+    if (projectFlight) {
+      return;
+    }
+
+    const buttonRect = event.currentTarget.getBoundingClientRect();
+    const targetRect = detailRef.current?.getBoundingClientRect() ?? buttonRect;
+
+    const from = {
+      x: buttonRect.left + buttonRect.width / 2 - 18,
+      y: buttonRect.top + buttonRect.height / 2 - 18,
+    };
+    const to = {
+      x: targetRect.left + targetRect.width / 2 - 18,
+      y: targetRect.top + targetRect.height / 2 - 18,
+    };
+
+    const flightId = Date.now();
+    setProjectFlight({
+      id: flightId,
+      from,
+      to,
+      project,
+    });
+
+    window.setTimeout(() => {
+      if (project.link && project.link !== '#') {
+        window.open(project.link, '_blank', 'noopener,noreferrer');
+      }
+      setProjectFlight((currentFlight) => (currentFlight?.id === flightId ? null : currentFlight));
+    }, 1050);
+  };
+
+  const launchSectionFlight = (
+    targetRef: { current: HTMLElement | null },
+    label: string,
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    event.preventDefault();
+
+    if (sectionFlight) {
+      return;
+    }
+
+    const buttonRect = event.currentTarget.getBoundingClientRect();
+    const targetRect = targetRef.current?.getBoundingClientRect();
+
+    if (!targetRect) {
+      targetRef.current?.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+
+    const from = {
+      x: buttonRect.left + buttonRect.width / 2 - 18,
+      y: buttonRect.top + buttonRect.height / 2 - 18,
+    };
+    const to = {
+      x: Math.min(window.innerWidth - 60, targetRect.left + targetRect.width / 2 - 18),
+      y: Math.min(window.innerHeight - 90, targetRect.top + 32),
+    };
+
+    const flightId = Date.now();
+    setSectionFlight({ id: flightId, from, to, label });
+
+    window.setTimeout(() => {
+      targetRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setSectionFlight((currentFlight) => (currentFlight?.id === flightId ? null : currentFlight));
+    }, 900);
   };
 
   const isDestroying = siteTransitionPhase !== 'idle';
@@ -634,8 +804,100 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground">
       <CustomCursor />
       <motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} />
-      <Sidebar isDestroying={isDestroying} />
-      <Header onFeltonClick={triggerDestruction} isDestroying={isDestroying} />
+      <Sidebar isDestroying={isDestroying} emailTargetRef={emailTargetRef} emailActive={Boolean(emailFlight)} />
+      <Header
+        onFeltonClick={triggerDestruction}
+        onProjectsClick={(event) => launchSectionFlight(worksRef, 'Projects', event)}
+        onEmailClick={() => launchEmailFlight()}
+        isDestroying={isDestroying}
+      />
+
+      <AnimatePresence>
+        {emailFlight && (
+          <motion.div
+            key={emailFlight.id}
+            className="pointer-events-none fixed inset-0 z-[95]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="absolute flex items-center gap-2 rounded-full border border-neon-cyan/30 bg-background/90 px-3 py-2 text-neon-cyan shadow-[0_0_28px_rgba(6,182,212,0.35)] backdrop-blur-md"
+              initial={{ x: emailFlight.from.x, y: emailFlight.from.y, scale: 0.75, rotate: -14, opacity: 0 }}
+              animate={{
+                x: [emailFlight.from.x, emailFlight.from.x + 110, emailFlight.to.x],
+                y: [emailFlight.from.y, emailFlight.from.y - 100, emailFlight.to.y],
+                scale: [0.75, 1.04, 0.9],
+                rotate: [-14, -4, 8],
+                opacity: [0, 1, 1],
+              }}
+              exit={{ opacity: 0, scale: 0.85 }}
+              transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Send className="h-4 w-4" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground">Enviar</span>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {sectionFlight && (
+          <motion.div
+            key={sectionFlight.id}
+            className="pointer-events-none fixed inset-0 z-[95]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="absolute flex items-center gap-2 rounded-full border border-neon-purple/30 bg-background/90 px-3 py-2 text-neon-purple shadow-[0_0_28px_rgba(168,85,247,0.35)] backdrop-blur-md"
+              initial={{ x: sectionFlight.from.x, y: sectionFlight.from.y, scale: 0.75, rotate: -14, opacity: 0 }}
+              animate={{
+                x: [sectionFlight.from.x, sectionFlight.from.x + 120, sectionFlight.to.x],
+                y: [sectionFlight.from.y, sectionFlight.from.y - 100, sectionFlight.to.y],
+                scale: [0.75, 1.04, 0.9],
+                rotate: [-14, -4, 8],
+                opacity: [0, 1, 1],
+              }}
+              exit={{ opacity: 0, scale: 0.85 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Send className="h-4 w-4" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground">{sectionFlight.label}</span>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {projectFlight && (
+          <motion.div
+            key={projectFlight.id}
+            className="pointer-events-none fixed inset-0 z-[95]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+                              <motion.div
+              className="absolute flex items-center gap-2 rounded-full border border-neon-purple/30 bg-background/90 px-3 py-2 text-neon-purple shadow-[0_0_28px_rgba(168,85,247,0.35)] backdrop-blur-md"
+              initial={{ x: projectFlight.from.x, y: projectFlight.from.y, scale: 0.75, rotate: -14, opacity: 0 }}
+              animate={{
+                x: [projectFlight.from.x, projectFlight.from.x + 130, projectFlight.to.x],
+                y: [projectFlight.from.y, projectFlight.from.y - 110, projectFlight.to.y],
+                scale: [0.75, 1.04, 0.9],
+                rotate: [-14, -2, 8],
+                opacity: [0, 1, 1],
+              }}
+              exit={{ opacity: 0, scale: 0.85 }}
+              transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Send className="h-4 w-4" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground">Projeto</span>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <motion.main
         className="ml-0 pt-16 md:ml-20"
@@ -690,9 +952,14 @@ export default function Home() {
                   </HoverScale>
                 </GlowEffect>
                 <HoverScale scale={1.05}>
-                  <a href="#works" className="group inline-flex items-center gap-2 rounded-lg border border-neon-purple/60 px-6 py-3 font-mono text-sm text-neon-purple transition-all duration-300 hover:-translate-y-1 hover:bg-neon-purple/10">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={(event) => launchSectionFlight(worksRef, 'Projects', event)}
+                    className="group inline-flex items-center gap-2 rounded-lg border border-neon-purple/60 px-6 py-3 font-mono text-sm text-neon-purple transition-all duration-300 hover:-translate-y-1 hover:bg-neon-purple/10"
+                  >
                     View projects <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                  </a>
+                  </Button>
                 </HoverScale>
               </motion.div>
 
@@ -745,7 +1012,7 @@ export default function Home() {
           </div>
         </motion.section>
 
-        <section id="works" className="px-6 py-20 md:px-12">
+        <section id="works" ref={worksRef} className="px-6 py-20 md:px-12">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.75 }} className="mb-12">
             <h2 className="mb-2 text-4xl font-bold text-neon-purple glow-text">#projects</h2>
             <p className="text-muted-foreground">List of my projects</p>
@@ -816,7 +1083,12 @@ export default function Home() {
 
                         <div className="flex items-center justify-between">
                           <span className={`rounded border px-2 py-1 font-mono text-xs text-foreground ${project.color}`}>{project.status}</span>
-                          <button className="rounded p-2 transition-colors duration-300 hover:bg-secondary" aria-label={`Open ${project.title}`}>
+                          <button
+                            type="button"
+                            className="rounded p-2 transition-colors duration-300 hover:bg-secondary"
+                            aria-label={`Open ${project.title}`}
+                            onClick={(event) => launchProjectFlight(project, event)}
+                          >
                             <ExternalLink size={16} className="text-muted-foreground transition-colors group-hover:text-neon-purple" />
                           </button>
                         </div>
@@ -844,7 +1116,7 @@ export default function Home() {
                     {selectedProject.link && selectedProject.link !== '#' && (
                       <Button
                         size="sm"
-                        onClick={() => window.open(selectedProject.link, '_blank')}
+                        onClick={(event) => openProjectLinkWithFlight(selectedProject, event)}
                         className="gap-2 bg-gradient-to-r from-neon-purple to-neon-pink text-white hover:shadow-lg hover:shadow-neon-purple/50"
                       >
                         <ExternalLink size={16} />
@@ -1197,11 +1469,17 @@ export default function Home() {
 
               <FadeInUp delay={0.2}>
                 <GlowEffect duration={2}>
-                  <HoverScale scale={1.08}>
-                    <Button className="mt-4 rounded-lg bg-neon-purple px-6 py-3 font-mono font-semibold text-background transition-all duration-300 hover:-translate-y-1 hover:bg-neon-purple/90 hover:shadow-lg hover:shadow-neon-purple/50">
-                      Send me an email
-                    </Button>
-                  </HoverScale>
+                  <div ref={emailButtonRef}>
+                    <HoverScale scale={1.08}>
+                      <Button
+                        type="button"
+                        onClick={launchEmailFlight}
+                        className="mt-4 rounded-lg bg-neon-purple px-6 py-3 font-mono font-semibold text-background transition-all duration-300 hover:-translate-y-1 hover:bg-neon-purple/90 hover:shadow-lg hover:shadow-neon-purple/50"
+                      >
+                        Send me an email
+                      </Button>
+                    </HoverScale>
+                  </div>
                 </GlowEffect>
               </FadeInUp>
             </div>
@@ -1395,7 +1673,7 @@ export default function Home() {
                         <p className="mt-2 text-neon-cyan">A minha jornada continua a crescer com tecnologia, liderança e impacto real.</p>
                       </footer>
 
-                      <div className="relative mt-8">
+                      <div className="relative mx-auto mt-8 max-w-6xl px-4 sm:px-6 lg:px-10">
                         <div className="hidden md:block pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-background to-transparent" />
                         <div className="hidden md:block pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-background to-transparent" />
 
@@ -1538,7 +1816,7 @@ export default function Home() {
                             onClick={() => setSelectedCvItem(null)}
                           >
                             <motion.div
-                                className="w-full max-w-5xl overflow-hidden rounded-3xl border border-neon-purple/40 bg-background/95 shadow-2xl shadow-black/60 my-8"
+                                className="w-full max-w-4xl overflow-hidden rounded-3xl border border-neon-purple/40 bg-background/95 shadow-2xl shadow-black/60 my-8"
                               initial={{ opacity: 0, y: 28, scale: 0.96 }}
                               animate={{ opacity: 1, y: 0, scale: 1 }}
                               exit={{ opacity: 0, y: 18, scale: 0.98 }}
@@ -1546,7 +1824,7 @@ export default function Home() {
                               onClick={(event) => event.stopPropagation()}
                             >
                               <div className={`h-2 w-full bg-gradient-to-r ${accentPalette[selectedCvItem.accent].line}`} />
-                              <div className="grid gap-6 p-4 sm:gap-8 sm:p-6 md:p-8 lg:grid-cols-[1.15fr_0.85fr] lg:p-10">
+                                <div className="grid gap-5 p-4 sm:gap-6 sm:p-5 md:p-6 lg:grid-cols-[1.1fr_0.9fr] lg:p-8">
                                 <div>
                                   <div className="flex flex-wrap items-center gap-3">
                                     <span className="rounded-full border border-neon-cyan/40 bg-background/60 px-3 py-1 font-mono text-xs text-neon-cyan">
@@ -1557,14 +1835,14 @@ export default function Home() {
                                     </span>
                                   </div>
 
-                                  <h3 className="mt-4 text-3xl font-bold text-foreground md:text-5xl">
+                                  <h3 className="mt-4 text-2xl font-bold text-foreground md:text-4xl">
                                     {selectedCvItem.title}
                                   </h3>
-                                  <p className={`mt-3 text-lg font-medium ${accentPalette[selectedCvItem.accent].text}`}>
+                                  <p className={`mt-2.5 text-base font-medium ${accentPalette[selectedCvItem.accent].text}`}>
                                     {selectedCvItem.organization}
                                   </p>
 
-                                  <div className="mt-4 flex flex-wrap gap-3 text-sm text-muted-foreground">
+                                  <div className="mt-3 flex flex-wrap gap-3 text-sm text-muted-foreground">
                                     <span className="inline-flex items-center gap-1.5">
                                       <MapPin className="h-4 w-4" />
                                       {selectedCvItem.location}
@@ -1575,13 +1853,13 @@ export default function Home() {
                                     </span>
                                   </div>
 
-                                  <p className="mt-5 max-w-3xl text-base leading-8 text-muted-foreground md:text-lg">
+                                  <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
                                     {selectedCvItem.summary}
                                   </p>
 
-                                  <ul className="mt-6 space-y-3">
+                                  <ul className="mt-5 space-y-2.5">
                                     {selectedCvItem.achievements.map((achievement) => (
-                                      <li key={achievement} className="flex gap-3 text-sm leading-7 text-foreground/90 md:text-base">
+                                      <li key={achievement} className="flex gap-3 text-sm leading-6 text-foreground/90">
                                         <span className={`mt-3 h-2 w-2 shrink-0 rounded-full bg-gradient-to-r ${accentPalette[selectedCvItem.accent].line}`} />
                                         <span>{achievement}</span>
                                       </li>
@@ -1589,7 +1867,7 @@ export default function Home() {
                                   </ul>
                                 </div>
 
-                                <div className="space-y-6 rounded-2xl border border-white/10 bg-card/50 p-5 backdrop-blur-sm md:p-6">
+                                <div className="space-y-5 rounded-2xl border border-white/10 bg-card/50 p-4 backdrop-blur-sm md:p-5">
                                   <div>
                                     <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">Tags</p>
                                     <div className="mt-3 flex flex-wrap gap-2">
@@ -1603,7 +1881,7 @@ export default function Home() {
 
                                   <div>
                                     <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">Resumo</p>
-                                    <p className="mt-3 text-sm leading-7 text-muted-foreground md:text-base">
+                                    <p className="mt-3 text-sm leading-6 text-muted-foreground">
                                       Clique nos outros cards para alternar rapidamente entre os marcos da tua jornada.
                                     </p>
                                   </div>

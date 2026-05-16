@@ -1,11 +1,14 @@
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, Globe } from 'lucide-react';
+import type { RefObject } from 'react';
 
 type SidebarProps = {
   isDestroying?: boolean;
+  emailTargetRef?: RefObject<HTMLAnchorElement | null>;
+  emailActive?: boolean;
 };
 
-export default function Sidebar({ isDestroying = false }: SidebarProps) {
+export default function Sidebar({ isDestroying = false, emailTargetRef, emailActive = false }: SidebarProps) {
   const socialIcons = [
     { icon: Github, href: 'https://github.com/Felton7JE', color: 'neon-purple', title: 'GitHub' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/estevafelton/', color: 'neon-cyan', title: 'LinkedIn' },
@@ -51,16 +54,25 @@ export default function Sidebar({ isDestroying = false }: SidebarProps) {
           return (
             <motion.a
               key={social.title}
+              ref={social.title === 'Email' ? emailTargetRef : undefined}
               href={social.href}
               target={social.href.startsWith('mailto') ? undefined : '_blank'}
               rel={social.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
               className={`p-3 rounded-lg hover:bg-secondary hover:border hover:${borderClass} transition-all duration-300 text-muted-foreground ${hoverClass}`}
               title={social.title}
               whileHover={{ scale: 1.15, rotate: 10 }}
+              animate={
+                social.title === 'Email' && emailActive
+                  ? {
+                      scale: [1, 1.18, 1],
+                      rotate: [0, -8, 0],
+                      filter: ['drop-shadow(0 0 0 rgba(236,72,153,0))', 'drop-shadow(0 0 14px rgba(236,72,153,0.95))', 'drop-shadow(0 0 0 rgba(236,72,153,0))'],
+                    }
+                  : { opacity: 1, x: 0 }
+              }
+              transition={social.title === 'Email' && emailActive ? { duration: 1, ease: [0.22, 1, 0.36, 1] } : { duration: 0.4, delay: index * 0.1 }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
             >
               <Icon size={24} />
             </motion.a>
