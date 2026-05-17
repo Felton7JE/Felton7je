@@ -5,12 +5,10 @@ import { Menu, X } from 'lucide-react';
 
 type HeaderProps = {
   onFeltonClick?: () => void;
-  onProjectsClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  onEmailClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   isDestroying?: boolean;
 };
 
-export default function Header({ onFeltonClick, onProjectsClick, onEmailClick, isDestroying = false }: HeaderProps) {
+export default function Header({ onFeltonClick, isDestroying = false }: HeaderProps) {
   const isMobile = useIsMobile();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -81,31 +79,6 @@ export default function Header({ onFeltonClick, onProjectsClick, onEmailClick, i
             </motion.a>
           ))}
 
-          <div className="flex items-center gap-2">
-            <motion.button
-              type="button"
-              onClick={onProjectsClick}
-              className="rounded-full border border-neon-purple/50 px-3 py-1 text-xs font-mono text-neon-purple transition-colors duration-300 hover:bg-neon-purple/10"
-              whileHover={{ y: -2 }}
-              initial={{ opacity: 0, y: -10 }}
-              animate={isDestroying ? { opacity: 0, y: -18 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.45 }}
-            >
-              Projects
-            </motion.button>
-
-            <motion.button
-              type="button"
-              onClick={onEmailClick}
-              className="rounded-full border border-neon-cyan/50 px-3 py-1 text-xs font-mono text-neon-cyan transition-colors duration-300 hover:bg-neon-cyan/10"
-              whileHover={{ y: -2 }}
-              initial={{ opacity: 0, y: -10 }}
-              animate={isDestroying ? { opacity: 0, y: -18 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.5 }}
-            >
-              Email
-            </motion.button>
-          </div>
         </nav>
       )}
 
@@ -168,29 +141,6 @@ export default function Header({ onFeltonClick, onProjectsClick, onEmailClick, i
                 </motion.a>
               ))}
 
-              <motion.button
-                type="button"
-                onClick={(event) => {
-                  setMobileMenuOpen(false);
-                  onProjectsClick?.(event);
-                }}
-                className="text-left text-sm text-neon-purple transition-colors duration-300 font-mono py-2 px-2 rounded hover:bg-neon-purple/10"
-                whileHover={{ x: 4 }}
-              >
-                Projects
-              </motion.button>
-
-              <motion.button
-                type="button"
-                onClick={(event) => {
-                  setMobileMenuOpen(false);
-                  onEmailClick?.(event);
-                }}
-                className="text-left text-sm text-neon-cyan transition-colors duration-300 font-mono py-2 px-2 rounded hover:bg-neon-cyan/10"
-                whileHover={{ x: 4 }}
-              >
-                Email
-              </motion.button>
             </div>
           </motion.nav>
         )}

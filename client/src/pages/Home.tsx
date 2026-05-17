@@ -807,8 +807,6 @@ export default function Home() {
       <Sidebar isDestroying={isDestroying} emailTargetRef={emailTargetRef} emailActive={Boolean(emailFlight)} />
       <Header
         onFeltonClick={triggerDestruction}
-        onProjectsClick={(event) => launchSectionFlight(worksRef, 'Projects', event)}
-        onEmailClick={() => launchEmailFlight()}
         isDestroying={isDestroying}
       />
 
