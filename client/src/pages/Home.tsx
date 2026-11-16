@@ -20,12 +20,12 @@ export default function Home() {
         {/* ============================================================ */}
         <section
           id="home"
-          className="relative min-h-screen w-full flex flex-col justify-between px-6 pt-28 pb-8 md:px-14 lg:px-20 md:pb-12 text-white overflow-hidden bg-transparent"
+          className="relative min-h-screen w-full flex flex-col justify-between px-6 pt-20 sm:pt-24 lg:pt-28 pb-6 md:pb-10 md:px-14 lg:px-20 text-white overflow-hidden bg-transparent"
         >
           {/* Bloco Principal da Esquerda */}
-          <div className="max-w-xl my-auto z-20">
+          <div className="max-w-xl my-auto py-3 z-20">
             {/* Tag com traço âmbar */}
-            <div className="flex items-center gap-2.5 mb-4">
+            <div className="flex items-center gap-2.5 mb-3 sm:mb-4">
               <span className="w-6 h-[2px] bg-amber-500 inline-block" />
               <span className="text-amber-500 font-mono text-xs font-semibold tracking-[0.24em] uppercase">
                 {t('hero.badge')}
@@ -33,21 +33,21 @@ export default function Home() {
             </div>
 
             {/* Título Principal */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] mb-5">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.08] mb-4 sm:mb-5">
               {t('hero.title1')}<br />
               <span className="text-amber-500">{t('hero.title2')}</span>
             </h1>
 
             {/* Subtítulo */}
-            <p className="text-zinc-300 text-sm sm:text-base lg:text-lg max-w-md font-light leading-relaxed mb-8">
+            <p className="text-zinc-300 text-sm sm:text-base lg:text-lg max-w-md font-light leading-relaxed mb-6 sm:mb-8">
               {t('hero.subtitle')}
             </p>
 
             {/* Botões de Ação */}
-            <div className="flex flex-wrap items-center gap-5">
+            <div className="flex flex-wrap items-center gap-4 sm:gap-5">
               <a
                 href="#works"
-                className="pointer-events-auto inline-flex items-center gap-2.5 rounded-lg bg-amber-500 px-6 py-3.5 font-sans font-bold text-sm text-black transition-all duration-300 hover:bg-amber-400 hover:shadow-lg hover:shadow-amber-500/30 hover:-translate-y-0.5 cursor-pointer"
+                className="pointer-events-auto inline-flex items-center gap-2.5 rounded-lg bg-amber-500 px-5 sm:px-6 py-3 sm:py-3.5 font-sans font-bold text-sm text-black transition-all duration-300 hover:bg-amber-400 hover:shadow-lg hover:shadow-amber-500/30 hover:-translate-y-0.5 cursor-pointer"
               >
                 {t('hero.btnProjects')} <ArrowRight size={18} />
               </a>
@@ -62,7 +62,7 @@ export default function Home() {
           </div>
 
           {/* Rodapé da Hero (Estatísticas, Indicador de Scroll e Tagline) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 items-end gap-6 pt-6 border-t border-white/10 z-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 items-end gap-5 pt-4 sm:pt-6 border-t border-white/10 z-20">
             {/* 1. Estatísticas à esquerda */}
             <div className="flex items-center gap-4 sm:gap-6">
               <div>
