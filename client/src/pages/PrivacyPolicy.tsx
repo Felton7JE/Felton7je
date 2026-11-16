@@ -12,7 +12,7 @@ export default function PrivacyPolicy() {
           </a>
           <h1 className="text-4xl font-bold mb-4">
             Política de Privacidade —{" "}
-            <span className="text-blue-500">Meu Quiz +</span>
+            <span className="text-amber-500">Meu Quiz +</span>
           </h1>
           <p className="text-muted-foreground text-sm">
             Última atualização: 5 de setembro de 2026

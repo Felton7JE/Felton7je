@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="dfmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00C2FF" />
+      <stop offset="100%" stop-color="#0052FF" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0B0F19"/>
+  <!-- D arrow shape -->
+  <path d="M12 20C12 18.8954 12.8954 18 14 18H23C29.6274 18 35 23.3726 35 30C35 36.6274 29.6274 42 23 42H14C12.8954 42 12 41.1046 12 40V20Z" fill="url(#dfmGrad)" fill-opacity="0.25"/>
+  <path d="M14 22L28 30L14 38V22Z" fill="url(#dfmGrad)"/>
+  <!-- Text FM -->
+  <text x="36" y="36" font-family="'Space Grotesk', -apple-system, sans-serif" font-size="18" font-weight="800" fill="#F8FAFC">FM</text>
+  <!-- Line below -->
+  <rect x="14" y="46" width="36" height="2" rx="1" fill="url(#dfmGrad)"/>
+</svg>
