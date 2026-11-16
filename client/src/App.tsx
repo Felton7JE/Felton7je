@@ -2,6 +2,7 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 import Home from "@/pages/Home";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import ScrollAnimation from "@/components/ScrollAnimation";
@@ -21,11 +22,13 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="dark">
-        {/* Background animado global persistente em todo o projeto */}
-        <ScrollAnimation global />
-        <Router />
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider defaultTheme="dark">
+          {/* Background animado global persistente em todo o projeto */}
+          <ScrollAnimation global />
+          <Router />
+        </ThemeProvider>
+      </LanguageProvider>
     </ErrorBoundary>
   );
 }
