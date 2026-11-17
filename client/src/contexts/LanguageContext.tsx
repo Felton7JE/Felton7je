@@ -48,6 +48,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.btn': 'FALAR COMIGO AGORA',
     'contact.location': 'Moçambique • Disponível Remotamente',
     'footer.rights': 'Todos os direitos reservados.',
+    'footer.privacy': 'Política de Privacidade',
   },
   en: {
     // Nav
@@ -86,6 +87,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.btn': 'GET IN TOUCH NOW',
     'contact.location': 'Mozambique • Available Globally (Remote)',
     'footer.rights': 'All rights reserved.',
+    'footer.privacy': 'Privacy Policy',
   },
 };
 

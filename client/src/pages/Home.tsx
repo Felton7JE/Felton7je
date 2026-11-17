@@ -236,9 +236,16 @@ export default function Home() {
       {/* 5. FOOTER MINIMALISTA                                        */}
       {/* ============================================================ */}
       <footer className="w-full py-10 px-6 md:px-14 lg:px-20 bg-black/75 backdrop-blur-sm border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-500">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           <span className="font-sans font-bold text-sm text-white">FELTON<span className="text-amber-500">.</span></span>
           <span>© 2026 Felton Estevão. {t('footer.rights')}</span>
+          <span className="text-zinc-700 hidden sm:inline">•</span>
+          <a
+            href="/privacy"
+            className="text-zinc-400 hover:text-amber-400 underline underline-offset-4 decoration-zinc-700 hover:decoration-amber-400 transition-colors"
+          >
+            {t('footer.privacy')}
+          </a>
         </div>
         <div className="flex items-center gap-2 uppercase tracking-widest text-zinc-400">
           <span className="w-4 h-[1.5px] bg-amber-500" />
